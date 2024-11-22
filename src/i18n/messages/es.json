@@ -31,5 +31,16 @@
         "content": "Si tienes alguna pregunta o inquietud sobre estos terminos y condiciones contactanos en {EMAIL_CONTACT_APPLICATION}"
       }
     }
+  },
+  "components": {
+    "language-switcher": {
+      "label": "Idiomas",
+      "options": {
+        "en": "Inglés",
+        "pt": "Portugués",
+        "es": "Español"
+      },
+      "placeholder": "Seleccione un idioma"
+    }
   }
 }

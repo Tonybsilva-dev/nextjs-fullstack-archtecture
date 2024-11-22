@@ -31,5 +31,16 @@
         "content": "Se voce tiver alguma duvida ou preocupacao sobre estes termos e condicoes por favor contate nos em {EMAIL_CONTACT_APPLICATION}"
       }
     }
+  },
+  "components": {
+    "language-switcher": {
+      "label": "Idiomas",
+      "options": {
+        "en": "Inglês",
+        "pt": "Português",
+        "es": "Espanhol"
+      },
+      "placeholder": "Selecione um idioma"
+    }
   }
 }
