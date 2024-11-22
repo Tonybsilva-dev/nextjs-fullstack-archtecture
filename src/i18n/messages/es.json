@@ -41,6 +41,14 @@
         "es": "Español"
       },
       "placeholder": "Seleccione un idioma"
+    },
+    "header-home": {
+      "links": {
+        "features": "Recursos",
+        "benefits": "Benefícios",
+        "contact": "Contato"
+      },
+      "login": "Acceso"
     }
   }
 }

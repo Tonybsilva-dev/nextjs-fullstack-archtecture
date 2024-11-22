@@ -41,6 +41,14 @@
         "es": "Spanish"
       },
       "placeholder": "Select a language"
+    },
+    "header-home": {
+      "links": {
+        "features": "Features",
+        "benefits": "Benefits",
+        "contact": "Contact"
+      },
+      "login": "Login"
     }
   }
 }

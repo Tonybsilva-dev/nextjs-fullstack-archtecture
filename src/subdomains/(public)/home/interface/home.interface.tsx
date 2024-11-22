@@ -4,36 +4,12 @@ import Link from 'next/link';
 
 import { Button } from '@/shared/modules/components/ui/button';
 
+import HeaderHomePage from '../components/header';
+
 export const HomeView = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      <header className="border-b border-gray-200 px-4 py-6 lg:px-8">
-        <div className="container mx-auto flex items-center justify-between">
-          <Link className="text-xl font-semibold" href="#">
-            PayFlow
-          </Link>
-          <nav className="flex gap-6">
-            <Link
-              className="text-sm text-gray-600 hover:text-gray-900"
-              href="#features"
-            >
-              Recursos
-            </Link>
-            <Link
-              className="text-sm text-gray-600 hover:text-gray-900"
-              href="#pricing"
-            >
-              Preços
-            </Link>
-            <Link
-              className="text-sm text-gray-600 hover:text-gray-900"
-              href="#contact"
-            >
-              Contato
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <HeaderHomePage />
       <main className="flex-1">
         <section className="py-20 lg:py-32">
           <div className="container mx-auto px-4 text-center">
