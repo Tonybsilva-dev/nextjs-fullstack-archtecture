@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority';
-import { twMerge } from 'tailwind-merge';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const typographyVariants = cva('', {
   variants: {
@@ -50,7 +50,7 @@ const typographyVariants = cva('', {
 
 interface TypographyProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'color'>, // Omitir 'color' aqui
-  VariantProps<typeof typographyVariants> {
+    VariantProps<typeof typographyVariants> {
   as?: React.ElementType;
 }
 
@@ -69,7 +69,14 @@ export const Typography: React.FC<TypographyProps> = ({
   return (
     <Component
       className={twMerge(
-        typographyVariants({ variant, color, align, gutterBottom, noWrap, paragraph }),
+        typographyVariants({
+          variant,
+          color,
+          align,
+          gutterBottom,
+          noWrap,
+          paragraph,
+        }),
         className
       )}
       {...props}
