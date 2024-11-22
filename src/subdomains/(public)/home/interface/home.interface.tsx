@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link'
 import { Button } from '@/shared/modules/components/ui/button'
 
@@ -32,12 +34,16 @@ export const HomeView = () => {
               Simplifique sua gestão financeira e de clientes com nossa plataforma intuitiva e poderosa.
             </p>
             <div className="flex justify-center gap-4">
-              <Button asChild>
-                <Link href="#contact">Comece Agora</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="#features">Saiba Mais</Link>
-              </Button>
+              <Link href="#contact">
+                <Button>
+                  Comece Agora
+                </Button>
+              </Link>
+              <Link href="#features">
+                <Button variant="outline">
+                  Saiba Mais
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -107,12 +113,16 @@ export const HomeView = () => {
               Entre em contato conosco para uma demonstração gratuita ou para começar a usar nossa plataforma hoje mesmo.
             </p>
             <div className="flex justify-center gap-4">
-              <Button asChild>
-                <Link href="#contact">Solicitar Demonstração</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="#contact">Fale Conosco</Link>
-              </Button>
+              <Link href="#contact">
+                <Button>
+                  Solicitar Demonstração
+                </Button>
+              </Link>
+              <Link href="#contact">
+                <Button variant="outline">
+                  Fale Conosco
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

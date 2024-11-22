@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Fullstack Archtecture",
     default: "Fullstack Archtecture"
   },
-  description: "Personal Fullstack Archtecture",
+  description: "Antonio Silva Fullstack Archtecture",
   icons: {
     icon: [
       { rel: 'icon', type: 'image/png', href: '/favicon-96x96.png', sizes: '96x96', url: "#" },
@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${ubuntu.className} antialiased`}>
+      <body className={`${ubuntu.className} antialiased`}>
         <main>
           {children}
         </main>
