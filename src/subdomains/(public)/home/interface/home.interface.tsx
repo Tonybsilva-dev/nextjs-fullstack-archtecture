@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-
+import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
 
 import HeaderHomePage from '../components/header';
@@ -21,12 +20,12 @@ export const HomeView = () => {
               plataforma intuitiva e poderosa.
             </p>
             <div className="flex justify-center gap-4">
-              <Link href="#contact">
+              <CustomLink href="#contact">
                 <Button>Comece Agora</Button>
-              </Link>
-              <Link href="#features">
+              </CustomLink>
+              <CustomLink href="#features">
                 <Button variant="outline">Saiba Mais</Button>
-              </Link>
+              </CustomLink>
             </div>
           </div>
         </section>
@@ -120,12 +119,12 @@ export const HomeView = () => {
               começar a usar nossa plataforma hoje mesmo.
             </p>
             <div className="flex justify-center gap-4">
-              <Link href="#contact">
+              <CustomLink href="#contact">
                 <Button>Solicitar Demonstração</Button>
-              </Link>
-              <Link href="#contact">
+              </CustomLink>
+              <CustomLink href="#contact">
                 <Button variant="outline">Fale Conosco</Button>
-              </Link>
+              </CustomLink>
             </div>
           </div>
         </section>
@@ -136,18 +135,12 @@ export const HomeView = () => {
             © 2023 PayFlow. Todos os direitos reservados.
           </p>
           <nav className="mt-4 flex gap-4 sm:mt-0">
-            <Link
+            <CustomLink
               className="text-sm text-gray-600 hover:text-gray-900"
-              href="#"
+              href="/terms-and-conditions"
             >
-              Termos de Serviço
-            </Link>
-            <Link
-              className="text-sm text-gray-600 hover:text-gray-900"
-              href="#"
-            >
-              Privacidade
-            </Link>
+              Termos e condições de serviço
+            </CustomLink>
           </nav>
         </div>
       </footer>

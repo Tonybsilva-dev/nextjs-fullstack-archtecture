@@ -1,11 +1,11 @@
 'use client';
 
 import { MenuIcon } from 'lucide-react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { LanguageSwitcher } from '@/shared/modules/components/custom/language-switcher';
+import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
 import { Separator } from '@/shared/modules/components/ui/separator';
 import {
@@ -43,7 +43,7 @@ export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
         <Separator className="my-4" />
         <nav className="flex flex-col gap-4">
           {links.map((link) => (
-            <Link
+            <CustomLink
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
@@ -54,7 +54,7 @@ export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
               >
                 {link.label}
               </Typography>
-            </Link>
+            </CustomLink>
           ))}
         </nav>
         <div className="mt-auto">
