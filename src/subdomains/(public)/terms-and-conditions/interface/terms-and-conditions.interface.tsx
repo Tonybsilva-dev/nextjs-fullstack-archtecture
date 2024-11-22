@@ -1,5 +1,3 @@
-'use client';
-
 import { BackButton } from "@/shared/modules/components/ui/back-button";
 import { LAST_UPDATED_APPLICATION, NAME_APPLICATION } from "@/shared/modules/constants/application.constants";
 
