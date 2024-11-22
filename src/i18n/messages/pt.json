@@ -1,0 +1,35 @@
+{
+  "splash-screen": {
+    "title": "Carregando..."
+  },
+  "terms-and-conditions": {
+    "title": "termos e condicoes",
+    "last-updated": "última atualizacao",
+    "sections": {
+      "user-responsibilities": {
+        "heading": "Responsabilidades do usuário",
+        "content": "Ao usar o {NAME_APPLICATION} voce concorda em usar o servico de forma responsavel e legal isto inclui mas nao esta limitado a respeitar a privacidade dos outros abster se de atos abusivos ou comportamento de assedio e nao se envolver em quaisquer atividades ilegais"
+      },
+      "data-privacy": {
+        "heading": "Privacidade dos dados",
+        "content": "Levamos a serio a privacidade dos seus dados qualquer informacao pessoal que voce nos fornecer sera tratada de acordo com nossa politica de privacidade nao compartilharemos ou venderemos seus dados a terceiros sem o seu consentimento exceto conforme exigido por lei"
+      },
+      "intellectual-property": {
+        "heading": "Propriedade intelectual",
+        "content": "A {NAME_APPLICATION} incluindo seu software conteudo e marca e propriedade de antonio s e e protegida por direitos autorais e outras leis de propriedade intelectual voce nao pode reproduzir modificar ou distribuir qualquer parte do servico sem nosso consentimento previo por escrito"
+      },
+      "liability-limitations": {
+        "heading": "Limitacao de responsabilidade",
+        "content": "Faremos esforcos razoaveis para garantir a confiabilidade e disponibilidade do {NAME_APPLICATION} mas nao podemos garantir que o servico sera ininterrupto ou livre de erros nao seremos responsaveis por quaisquer danos ou perdas resultantes do uso do servico incluindo mas nao limitado a danos diretos indiretos incidentais ou consequenciais"
+      },
+      "terms-changes": {
+        "heading": "Mudancas nos termos",
+        "content": "Reservamo-nos o direito de atualizar estes termos e condicoes a qualquer momento quaisquer alteracoes entrarao em vigor imediatamente apos a publicacao dos termos atualizados em nosso site e sua responsabilidade revisar os termos e condicoes periodicamente para quaisquer atualizacoes"
+      },
+      "contact-us": {
+        "heading": "Contate nos",
+        "content": "Se voce tiver alguma duvida ou preocupacao sobre estes termos e condicoes por favor contate nos em {EMAIL_CONTACT_APPLICATION}"
+      }
+    }
+  }
+}

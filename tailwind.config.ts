@@ -58,7 +58,19 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
-      }
+      },
+      animation: {
+        spin: 'spin 1s linear infinite',
+        fade: 'fadeIn 0.5s ease-in-out',
+        'spin-slow': 'spin 3s linear infinite',
+        'spin-fast': 'spin 0.5s linear infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: "0" },
+          '100%': { opacity: "1" },
+        },
+      },
     }
   },
   plugins: [require("tailwindcss-animate")],

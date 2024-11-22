@@ -1,0 +1,35 @@
+{
+  "splash-screen": {
+    "title": "Loading..."
+  },
+  "terms-and-conditions": {
+    "title": "Terms and conditions",
+    "last-updated": "Last updated",
+    "sections": {
+      "user-responsibilities": {
+        "heading": "User responsibilities",
+        "content": "By using {NAME_APPLICATION} you agree to use the service responsibly and legally this includes but is not limited to respecting others privacy refraining from abusive behavior or harassment and avoiding any illegal activities"
+      },
+      "data-privacy": {
+        "heading": "Data privacy",
+        "content": "We take your data privacy seriously any personal information you provide to us will be handled in accordance with our privacy policy we will not share or sell your data to third parties without your consent except as required by law"
+      },
+      "intellectual-property": {
+        "heading": "Intellectual property",
+        "content": "{NAME_APPLICATION} including its software content and brand is owned by antonio s and is protected by copyright and other intellectual property laws you may not reproduce modify or distribute any part of the service without prior written consent"
+      },
+      "liability-limitations": {
+        "heading": "Limitation of liability",
+        "content": "We will make reasonable efforts to ensure the reliability and availability of {NAME_APPLICATION} but we cannot guarantee that the service will be uninterrupted or error free we are not liable for any damages or losses resulting from the use of the service including but not limited to direct indirect incidental or consequential damages"
+      },
+      "terms-changes": {
+        "heading": "Changes to terms",
+        "content": "We reserve the right to update these terms and conditions at any time any changes will take effect immediately upon the posting of the updated terms on our website it is your responsibility to review the terms and conditions periodically for updates"
+      },
+      "contact-us": {
+        "heading": "Contact us",
+        "content": "If you have any questions or concerns about these terms and conditions please contact us at {EMAIL_CONTACT_APPLICATION}"
+      }
+    }
+  }
+}

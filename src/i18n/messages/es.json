@@ -1,0 +1,35 @@
+{
+  "splash-screen": {
+    "title": "Cargando..."
+  },
+  "terms-and-conditions": {
+    "title": "Terminos y condiciones",
+    "last-updated": "Última actualizacion",
+    "sections": {
+      "user-responsibilities": {
+        "heading": "Responsabilidades del usuario",
+        "content": "Al usar {NAME_APPLICATION} aceptas utilizar el servicio de manera responsable y legal esto incluye pero no se limita a respetar la privacidad de los demas abstenerse de comportamientos abusivos o de acoso y evitar cualquier actividad ilegal"
+      },
+      "data-privacy": {
+        "heading": "Privacidad de datos",
+        "content": "Nos tomamos en serio la privacidad de tus datos cualquier informacion personal que nos proporciones sera tratada de acuerdo con nuestra politica de privacidad no compartiremos ni venderemos tus datos a terceros sin tu consentimiento salvo cuando lo requiera la ley"
+      },
+      "intellectual-property": {
+        "heading": "Propiedad intelectual",
+        "content": "{NAME_APPLICATION} incluido su software contenido y marca es propiedad de antonio s y esta protegido por derechos de autor y otras leyes de propiedad intelectual no puedes reproducir modificar ni distribuir ninguna parte del servicio sin nuestro consentimiento previo por escrito"
+      },
+      "liability-limitations": {
+        "heading": "Limitacion de responsabilidad",
+        "content": "Haremos esfuerzos razonables para garantizar la fiabilidad y disponibilidad de {NAME_APPLICATION} pero no podemos garantizar que el servicio sea ininterrumpido o este libre de errores no seremos responsables de ningun dano o perdida resultante del uso del servicio incluidos entre otros danos directos indirectos incidentes o consecuentes"
+      },
+      "terms-changes": {
+        "heading": "Cambios en los terminos",
+        "content": "Nos reservamos el derecho de actualizar estos terminos y condiciones en cualquier momento cualquier cambio entrara en vigor inmediatamente despues de la publicacion de los terminos actualizados en nuestro sitio web es tu responsabilidad revisar los terminos y condiciones periodicamente para conocer las actualizaciones"
+      },
+      "contact-us": {
+        "heading": "Contactanos",
+        "content": "Si tienes alguna pregunta o inquietud sobre estos terminos y condiciones contactanos en {EMAIL_CONTACT_APPLICATION}"
+      }
+    }
+  }
+}
