@@ -5,17 +5,17 @@ import { twMerge } from 'tailwind-merge';
 const typographyVariants = cva('', {
   variants: {
     variant: {
-      h1: 'text-4xl font-bold',
-      h2: 'text-3xl font-bold',
-      h3: 'text-2xl font-semibold',
-      h4: 'text-xl font-semibold',
-      h5: 'text-lg font-medium',
-      h6: 'text-base font-medium',
-      body1: 'text-base text-gray-500 dark:text-gray-400',
-      body2: 'text-sm text-gray-500 dark:text-gray-400',
-      body3: 'text-md',
-      caption: 'text-xs',
-      overline: 'text-xs uppercase tracking-wider',
+      h1: 'text-3xl sm:text-4xl font-bold',
+      h2: 'text-2xl sm:text-3xl font-bold',
+      h3: 'text-xl sm:text-2xl font-semibold',
+      h4: 'text-lg sm:text-xl font-semibold',
+      h5: 'text-md sm:text-lg font-medium',
+      h6: 'text-sm sm:text-base font-medium',
+      body1: 'text-sm sm:text-base text-gray-500 dark:text-gray-400',
+      body2: 'text-xs sm:text-sm text-gray-500 dark:text-gray-400',
+      body3: 'text-sm sm:text-md',
+      caption: 'text-xs sm:text-sm',
+      overline: 'text-xs sm:text-sm uppercase tracking-wider',
     },
     color: {
       primary: 'text-primary-500',

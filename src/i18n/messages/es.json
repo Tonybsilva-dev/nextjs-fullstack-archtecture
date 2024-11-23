@@ -2,6 +2,31 @@
   "splash-screen": {
     "title": "Cargando..."
   },
+  "home-page": {
+    "organize-grow": "¡Organiza, vende, crece!",
+    "manage-store": "Administra todas las partes de tu tienda y aumenta las ventas con la facilidad que deseas",
+    "description": "Hecho para todos los tamaños de tiendas, Loja Management es gratuito y te ayuda a tener el control de todo sin perder el enfoque en lo más importante: vender.",
+    "email-placeholder": "Ingresa tu mejor correo electrónico aquí",
+    "cta-button": "¡USA GRATIS AHORA!",
+    "feature": {
+      "features-title": "Características Principales",
+      "clients-title": "Gestión de Clientes",
+      "clients-description": "Organiza y sigue información detallada de los clientes, historial de interacciones y preferencias.",
+      "payments-title": "Procesamiento de Pagos",
+      "payments-description": "Acepta diversos métodos de pago y gestiona transacciones de forma segura y eficiente.",
+      "reports-title": "Informes y Análisis",
+      "reports-description": "Obtén valiosos insights con informes detallados sobre ventas, clientes y tendencias financieras."
+    },
+    "contact-title": "¿Listo para comenzar?",
+    "contact-description": "Ponte en contacto con nosotros para una demostración gratuita o para comenzar a usar nuestra plataforma hoy mismo.",
+    "contact-demo-button": "Solicitar Demostración",
+    "contact-contact-button": "Contáctanos",
+    "footer": {
+      "footer-copy": "© 2023 Loja Management. Todos los derechos reservados.",
+      "terms-and-conditions": "Términos y condiciones del servicio"
+    },
+    "image-alt": "Vendedora sonriente en una tienda de ropa"
+  },
   "terms-and-conditions": {
     "title": "Terminos y condiciones",
     "last-updated": "Última actualizacion",

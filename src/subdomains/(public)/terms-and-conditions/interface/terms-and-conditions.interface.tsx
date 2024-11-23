@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 
+import { LanguageSwitcher } from '@/shared/modules/components/custom/language-switcher';
 import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Typography } from '@/shared/modules/components/ui/typography';
 import {
@@ -12,15 +13,19 @@ export const TermsAndConditionsView = () => {
   const t = useTranslations('terms-and-conditions');
   return (
     <main
-      className="mx-auto w-full max-w-3xl px-4 py-6 md:px-6 md:py-24"
+      className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 md:px-8 md:py-24"
       aria-labelledby="terms-heading"
     >
-      <BackButton />
+      <div className="mb-6 flex w-full items-center justify-between">
+        <BackButton />
+        <LanguageSwitcher />
+      </div>
       <div className="space-y-8">
         <header>
           <Typography
             id="terms-heading"
-            className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
+            className="text-center sm:text-4xl md:text-5xl"
+            variant={'h1'}
           >
             {t('title')}
           </Typography>

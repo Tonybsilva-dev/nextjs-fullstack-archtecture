@@ -2,6 +2,31 @@
   "splash-screen": {
     "title": "Loading..."
   },
+  "home-page": {
+    "organize-grow": "Organize, sell, grow!",
+    "manage-store": "Manage every part of your store and increase sales with the ease you desire",
+    "description": "Made for all store sizes, Loja Management is free and helps you take control of everything without losing focus on what matters most: selling.",
+    "email-placeholder": "Enter your best email here",
+    "cta-button": "USE FOR FREE NOW",
+    "feature": {
+      "features-title": "Main Features",
+      "clients-title": "Client Management",
+      "clients-description": "Organize and track detailed client information, interaction history, and preferences.",
+      "payments-title": "Payment Processing",
+      "payments-description": "Accept various payment methods and manage transactions securely and efficiently.",
+      "reports-title": "Reports and Analytics",
+      "reports-description": "Gain valuable insights with detailed reports on sales, clients, and financial trends."
+    },
+    "contact-title": "Ready to Start?",
+    "contact-description": "Get in touch with us for a free demo or start using our platform today.",
+    "contact-demo-button": "Request Demo",
+    "contact-contact-button": "Contact Us",
+    "footer": {
+      "footer-copy": "© 2023 Loja Management. All rights reserved.",
+      "terms-and-conditions": "Terms and conditions of service"
+    },
+    "image-alt": "Smiling salesperson in a clothing store"
+  },
   "terms-and-conditions": {
     "title": "Terms and conditions",
     "last-updated": "Last updated",
