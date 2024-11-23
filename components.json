@@ -12,7 +12,7 @@
   },
   "aliases": {
     "components": "@/shared/modules/components",
-    "utils": "@/shared/modules/utils/shadcn.ts",
+    "utils": "@/shared/modules/utils/shadcn",
     "ui": "@/shared/modules/components/ui",
     "lib": "@/lib",
     "hooks": "@/shared/modules/hooks"
