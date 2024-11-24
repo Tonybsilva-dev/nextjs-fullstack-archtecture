@@ -2,10 +2,17 @@
   "splash-screen": {
     "title": "Loading..."
   },
+  "not-found": {
+    "alt": "Illustrative image of page not found",
+    "title": "Page not found",
+    "description": "The page you requested could not be found. Check the URL or navigate back to the main page.",
+    "back-button": "Go Back",
+    "logout-button": "Log Out"
+  },
   "home-page": {
     "organize-grow": "Organize, sell, grow!",
     "manage-store": "Manage every part of your store and increase sales with the ease you desire",
-    "description": "Made for all store sizes, Loja Management is free and helps you take control of everything without losing focus on what matters most: selling.",
+    "description": "Made for all store sizes, {NAME_APPLICATION} is free and helps you take control of everything without losing focus on what matters most: selling.",
     "email-placeholder": "Enter your best email here",
     "cta-button": "USE FOR FREE NOW",
     "feature": {
@@ -22,7 +29,7 @@
     "contact-demo-button": "Request Demo",
     "contact-contact-button": "Contact Us",
     "footer": {
-      "footer-copy": "© 2023 Loja Management. All rights reserved.",
+      "footer-copy": "© 2024 {NAME_APPLICATION}. All rights reserved.",
       "terms-and-conditions": "Terms and conditions of service"
     },
     "image-alt": "Smiling salesperson in a clothing store"
@@ -65,7 +72,15 @@
         "pt": "Portuguese",
         "es": "Spanish"
       },
-      "placeholder": "Select a language"
+      "placeholder": "Select a language",
+      "sr-only": {
+        "announcements": {
+          "changed-to": "Language changed to {locale}"
+        },
+        "aria-label": {
+          "select": "Language selector"
+        }
+      }
     },
     "header-home": {
       "links": {

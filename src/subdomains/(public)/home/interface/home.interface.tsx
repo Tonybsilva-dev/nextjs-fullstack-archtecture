@@ -7,6 +7,7 @@ import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
 import { Input } from '@/shared/modules/components/ui/input';
 import { Typography } from '@/shared/modules/components/ui/typography';
+import { NAME_APPLICATION } from '@/shared/modules/constants/application.constants';
 import { PageProps } from '@/shared/modules/types/page-props';
 
 import HeaderHomePage from '../components/header';
@@ -27,17 +28,16 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
           <div className="items-center lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
               <Typography
-                as="p"
                 variant="caption"
                 color="primary"
-                className="uppercase tracking-wide"
+                className="font-bold uppercase tracking-wide text-primary"
               >
                 {t('organize-grow')}
               </Typography>
               <Typography as="h1" variant="h1" className="mt-1 text-gray-900">
                 {t('manage-store')}
               </Typography>
-              <Typography as="p" variant="body1" className="mt-3 text-gray-500">
+              <Typography variant="body1" className="mt-3 text-gray-500">
                 {t('description')}
               </Typography>
               <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
@@ -62,17 +62,15 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
             </div>
             <div className="relative mt-12 sm:mx-auto sm:max-w-lg lg:col-span-6 lg:mx-0 lg:mt-0 lg:flex lg:max-w-none lg:items-center">
               <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                <div className="relative block w-full overflow-hidden rounded-lg bg-white shadow-lg">
-                  <Image
-                    src={WOMAN_SELLER_IMAGE}
-                    alt={t('image-alt')}
-                    width={500}
-                    height={500}
-                    className="w-full object-cover"
-                  />
-                </div>
+                <Image
+                  src={WOMAN_SELLER_IMAGE}
+                  alt={t('image-alt')}
+                  width={500}
+                  height={500}
+                  className="w-full object-cover"
+                />
                 <div
-                  className="absolute -bottom-8 -right-8 hidden h-64 w-64 rounded-tl-full bg-primary lg:block"
+                  className="absolute bottom-0 right-0 hidden h-64 w-64 rounded-tl-full bg-primary lg:block"
                   aria-hidden="true"
                 ></div>
               </div>
@@ -86,10 +84,12 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
             </Typography>
             <div className="grid gap-12 md:grid-cols-3">
               <div>
-                <Typography as="h3" variant="h3" className="mb-2">
-                  {t('feature.clients-title')}
-                </Typography>
-                <Typography as="p" variant="body1" className="text-gray-600">
+                <div className="flex items-center justify-center">
+                  <Typography as="h3" variant="h3" className="">
+                    {t('feature.clients-title')}
+                  </Typography>
+                </div>
+                <Typography variant="body1" className="text-gray-600">
                   {t('feature.clients-description')}
                 </Typography>
               </div>
@@ -97,7 +97,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
                 <Typography as="h3" variant="h3" className="mb-2">
                   {t('feature.payments-title')}
                 </Typography>
-                <Typography as="p" variant="body1" className="text-gray-600">
+                <Typography variant="body1" className="text-gray-600">
                   {t('feature.payments-description')}
                 </Typography>
               </div>
@@ -105,7 +105,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
                 <Typography as="h3" variant="h3" className="mb-2">
                   {t('feature.reports-title')}
                 </Typography>
-                <Typography as="p" variant="body1" className="text-gray-600">
+                <Typography variant="body1" className="text-gray-600">
                   {t('feature.reports-description')}
                 </Typography>
               </div>
@@ -114,13 +114,12 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
         </section>
         <section id="contact" className="bg-gray-100 py-20">
           <div className="container mx-auto px-4 text-center">
-            <Typography as="h2" variant="h2" className="mb-6">
+            <Typography as="h2" variant="h2" className="mb-6 text-center">
               {t('contact-title')}
             </Typography>
             <Typography
-              as="p"
               variant="body1"
-              className="mx-auto mb-8 max-w-2xl text-gray-600"
+              className="mx-auto mb-8 max-w-2xl text-center text-gray-600"
             >
               {t('contact-description')}
             </Typography>
@@ -137,12 +136,8 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
       </main>
       <footer className="border-t border-gray-200 py-8">
         <div className="container mx-auto flex flex-col items-center justify-between px-4 sm:flex-row">
-          <Typography
-            as="p"
-            variant="caption"
-            className="text-sm text-gray-600"
-          >
-            {t('footer.footer-copy')}
+          <Typography variant="caption" className="text-sm text-gray-600">
+            {t('footer.footer-copy', { NAME_APPLICATION })}
           </Typography>
           <nav className="mt-4 flex gap-4 sm:mt-0">
             <CustomLink

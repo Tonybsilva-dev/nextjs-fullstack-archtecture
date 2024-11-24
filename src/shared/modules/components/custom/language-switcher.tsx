@@ -8,7 +8,7 @@ import {
   useSearchParams,
 } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Select,
@@ -53,23 +53,32 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <Select
-      value={currentLocale}
-      onValueChange={(value: string) => changeLanguage(value as Locale)}
-    >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a language" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>{t('label')}</SelectLabel>
-          {supportedLocales.map((locale) => (
-            <SelectItem key={locale} value={locale}>
-              {t(`options.${locale}`)}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div role="group" aria-labelledby="language-switcher-label">
+      <span id="language-switcher-label" className="sr-only">
+        {t('sr-only.aria-label.select')}
+      </span>
+      <Select
+        value={currentLocale}
+        onValueChange={(value: string) => changeLanguage(value as Locale)}
+        aria-label={t('sr-only.aria-label.select')}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a language" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>{t('label')}</SelectLabel>
+            {supportedLocales.map((locale) => (
+              <SelectItem key={locale} value={locale}>
+                {t(`options.${locale}`)}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <div role="status" aria-live="polite" className="sr-only">
+        {t(`sr-only.announcements.changed-to`, { locale: currentLocale })}
+      </div>
+    </div>
   );
 }

@@ -2,10 +2,17 @@
   "splash-screen": {
     "title": "Carregando..."
   },
+  "not-found": {
+    "alt": "Imagem ilustrativa de página não encontrada",
+    "title": "Página não encontrada",
+    "description": "A página que você solicitou não foi localizada. Verifique o URL ou navegue de volta para a página principal.",
+    "back-button": "Voltar",
+    "logout-button": "Deslogar"
+  },
   "home-page": {
     "organize-grow": "Organize, venda, cresça!",
     "manage-store": "Controle todas as partes da sua loja e aumente vendas com a facilidade que deseja",
-    "description": "Feito para todos os tamanhos de loja, o Loja Management é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
+    "description": "Feito para todos os tamanhos de loja, o {NAME_APPLICATION} é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
     "email-placeholder": "Digite aqui seu melhor e-mail",
     "cta-button": "USE DE GRAÇA AGORA",
     "feature": {
@@ -22,7 +29,7 @@
     "contact-demo-button": "Solicitar Demonstração",
     "contact-contact-button": "Fale Conosco",
     "footer": {
-      "footer-copy": "© 2023 Loja Management. Todos os direitos reservados.",
+      "footer-copy": "© 2024 {NAME_APPLICATION}. Todos os direitos reservados.",
       "terms-and-conditions": "Termos e condições de serviço"
     },
     "image-alt": "Vendedora sorrindo em uma loja de roupas"
@@ -65,7 +72,15 @@
         "pt": "Português",
         "es": "Espanhol"
       },
-      "placeholder": "Selecione um idioma"
+      "placeholder": "Selecione um idioma",
+      "sr-only": {
+        "announcements": {
+          "changed-to": "Idioma alterado para {locale}"
+        },
+        "aria-label": {
+          "select": "Seletor de idioma"
+        }
+      }
     },
     "header-home": {
       "links": {
