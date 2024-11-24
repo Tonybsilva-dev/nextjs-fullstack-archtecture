@@ -1,5 +1,6 @@
 import '../globals.css';
 
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Ubuntu } from 'next/font/google';
 import { notFound } from 'next/navigation';
@@ -59,6 +60,7 @@ export default async function RootLayout({
         <main>
           <NextIntlClientProvider messages={messages}>
             {children}
+            <Analytics />
           </NextIntlClientProvider>
         </main>
       </body>
