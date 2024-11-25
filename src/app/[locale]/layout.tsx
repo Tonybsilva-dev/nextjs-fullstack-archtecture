@@ -8,32 +8,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
 import { routing } from '@/i18n/routing';
+import { metadataConfig } from '@/shared/config/metadata';
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s | Fullstack Archtecture',
-    default: 'Fullstack Archtecture',
-  },
-  description: 'Antonio Silva Fullstack Archtecture',
-  icons: {
-    icon: [
-      {
-        rel: 'icon',
-        type: 'image/png',
-        href: '/favicon-96x96.png',
-        sizes: '96x96',
-        url: '#',
-      },
-      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg', url: '#' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
-  manifest: '/site.webmanifest',
-  appleWebApp: {
-    title: 'Antonio S',
-  },
-};
+export const metadata: Metadata = metadataConfig;
 
 const ubuntu = Ubuntu({
   subsets: ['latin'],
