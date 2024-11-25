@@ -85,7 +85,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
             <div className="grid gap-12 md:grid-cols-3">
               <div>
                 <div className="flex items-center justify-center">
-                  <Typography as="h3" variant="h3" className="">
+                  <Typography as="h3" variant="h3" className="mb-2">
                     {t('feature.clients-title')}
                   </Typography>
                 </div>
@@ -93,7 +93,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
                   {t('feature.clients-description')}
                 </Typography>
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center">
                 <Typography as="h3" variant="h3" className="mb-2">
                   {t('feature.payments-title')}
                 </Typography>
@@ -101,7 +101,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
                   {t('feature.payments-description')}
                 </Typography>
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center">
                 <Typography as="h3" variant="h3" className="mb-2">
                   {t('feature.reports-title')}
                 </Typography>
