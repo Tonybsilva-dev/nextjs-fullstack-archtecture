@@ -32,13 +32,10 @@ export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
           <span className="sr-only">Abrir menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent
-        side="right"
-        className="flex w-[300px] flex-col sm:w-[400px]"
-      >
+      <SheetContent side="right" className="flex flex-col">
         <div className="mt-8 flex items-center justify-between">
           <Typography variant={'h4'}>MENU</Typography>
-          <LanguageSwitcher />
+          <LanguageSwitcher compact />
         </div>
         <Separator className="my-4" />
         <nav className="flex flex-col gap-4">
