@@ -107,15 +107,18 @@ export function LanguageSwitcher({ compact }: LanguageSwitcherProps) {
             {supportedLocales.map((locale) => (
               <SelectItem key={locale} value={locale}>
                 {compact ? (
-                  <div className="flex gap-2">
-                    {renderFlag(locale)}
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="flex-shrink-0">{renderFlag(locale)}</div>
                     <Typography variant={'overline'}>
                       {locale.toUpperCase()}
                     </Typography>
                   </div>
                 ) : (
                   <div className="flex gap-2 px-4">
-                    {renderFlag(locale)} {t(`options.${locale}`)}
+                    <div className="flex-shrink-0">{renderFlag(locale)}</div>
+                    <Typography variant={'body2'}>
+                      {t(`options.${locale}`)}
+                    </Typography>
                   </div>
                 )}
               </SelectItem>
