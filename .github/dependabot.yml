@@ -9,7 +9,6 @@ updates:
     open-pull-requests-limit: 1 # Limitar a 1 PR aberta
     allow:
       - dependency-type: 'direct' # Somente atualizações de dependências diretas
-    security-updates-only: true # Atualizar apenas patches de segurança
     ignore:
       - dependency-name: 'deprecated-package' # Ignorar pacotes obsoletos
     assignees:
@@ -17,9 +16,8 @@ updates:
     commit-message:
       prefix: '[DEPENDABOT]'
       include: scope # Inclui escopo no commit
-      message: 'Updating dependencies to improve security and performance'
-    group:
-      - group-name: 'dev-dependencies'
+    groups:
+      dev-dependencies:
         patterns:
           - 'eslint*'
           - 'webpack*'
