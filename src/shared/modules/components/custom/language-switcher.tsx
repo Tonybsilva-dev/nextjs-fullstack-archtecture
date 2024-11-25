@@ -1,6 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 import {
   ReadonlyURLSearchParams,
   usePathname,
@@ -19,11 +20,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { Typography } from '../ui/typography';
 
 const supportedLocales = ['en', 'pt', 'es'] as const;
 type Locale = (typeof supportedLocales)[number];
 
-export function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  compact?: boolean;
+};
+
+export function LanguageSwitcher({ compact }: LanguageSwitcherProps) {
   const [currentLocale, setCurrentLocale] = useState<Locale>('en');
   const router = useRouter();
   const pathname = usePathname();
@@ -52,6 +58,24 @@ export function LanguageSwitcher() {
     );
   };
 
+  const renderFlag = (locale: Locale) => {
+    const flagMap: Record<Locale, string> = {
+      en: '/locales/en.png',
+      pt: '/locales/pt.png',
+      es: '/locales/es.png',
+    };
+
+    return (
+      <Image
+        src={flagMap[locale]}
+        alt={locale}
+        width={24}
+        height={24}
+        className="rounded-full"
+      />
+    );
+  };
+
   return (
     <div role="group" aria-labelledby="language-switcher-label">
       <span id="language-switcher-label" className="sr-only">
@@ -62,15 +86,37 @@ export function LanguageSwitcher() {
         onValueChange={(value: string) => changeLanguage(value as Locale)}
         aria-label={t('sr-only.aria-label.select')}
       >
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a language" />
+        <SelectTrigger className="items-center justify-between">
+          <SelectValue>
+            {compact ? (
+              renderFlag(currentLocale)
+            ) : (
+              <div className="flex items-center gap-2">
+                {renderFlag(currentLocale)}
+                {t(`options.${currentLocale}`)}
+              </div>
+            )}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>{t('label')}</SelectLabel>
+            {!compact && (
+              <SelectLabel className="self-center">{t('label')}</SelectLabel>
+            )}
             {supportedLocales.map((locale) => (
               <SelectItem key={locale} value={locale}>
-                {t(`options.${locale}`)}
+                {compact ? (
+                  <div className="flex gap-2">
+                    {renderFlag(locale)}
+                    <Typography variant={'overline'}>
+                      {locale.toUpperCase()}
+                    </Typography>
+                  </div>
+                ) : (
+                  <div className="flex gap-2 px-4">
+                    {renderFlag(locale)} {t(`options.${locale}`)}
+                  </div>
+                )}
               </SelectItem>
             ))}
           </SelectGroup>

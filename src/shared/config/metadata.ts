@@ -30,16 +30,17 @@ export const metadataConfig: Metadata = {
     creator: '@antonio_silva',
     title: 'Fullstack Architecture',
     description: 'Antonio Silva Fullstack Architecture',
-    images: ['https://example.com/twitter-image.png'],
+    images: ['https://i.imgur.com/DaTIIDq.png'],
   },
   openGraph: {
     type: 'website',
+    siteName: 'Fullstack Archtecture',
     url: 'https://as-fullstack-archtecture.vercel.app/',
     title: 'Fullstack Architecture',
-    description: 'Antonio Silva - Fullstack Architecture',
+    description: 'Antonio S - Fullstack Archtecture with NextJS',
     images: [
       {
-        url: 'https://example.com/og-image.png',
+        url: 'https://i.imgur.com/DaTIIDq.png',
         width: 1200,
         height: 630,
         alt: 'Fullstack Architecture',
