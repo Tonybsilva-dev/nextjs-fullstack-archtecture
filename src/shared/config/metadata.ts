@@ -36,10 +36,10 @@ export const metadataConfig: Metadata = {
     type: 'website',
     url: 'https://as-fullstack-archtecture.vercel.app/',
     title: 'Fullstack Architecture',
-    description: 'Antonio Silva - Fullstack Architecture',
+    description: 'Antonio S - Fullstack Archtecture with NextJS',
     images: [
       {
-        url: 'https://example.com/og-image.png',
+        url: 'https://i.imgur.com/DaTIIDq.png',
         width: 1200,
         height: 630,
         alt: 'Fullstack Architecture',
