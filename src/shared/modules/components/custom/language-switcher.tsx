@@ -72,6 +72,7 @@ export function LanguageSwitcher({ compact }: LanguageSwitcherProps) {
         width={24}
         height={24}
         className="rounded-full"
+        loading="eager"
       />
     );
   };

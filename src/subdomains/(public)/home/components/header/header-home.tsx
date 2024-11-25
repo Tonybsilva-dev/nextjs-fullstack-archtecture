@@ -1,6 +1,15 @@
 import { useTranslations } from 'next-intl';
 
-import { LanguageSwitcher } from '@/shared/modules/components/custom/language-switcher';
+const LanguageSwitcher = dynamic(
+  () =>
+    import('@/shared/modules/components/custom/language-switcher').then(
+      (mod) => mod.LanguageSwitcher
+    ),
+  { ssr: false }
+);
+
+import dynamic from 'next/dynamic';
+
 import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
 
