@@ -1,0 +1,217 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+      fail-fast: false
+    env:
+      # DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      # SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Starting Build on Ubuntu
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: starting
+          channel: '#fullstack-archtecture'
+          message: 'Starting Build on Ubuntu Node.js ${{ matrix.node-version }}...'
+        if: always()
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-${{ matrix.node-version }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ matrix.node-version }}-
+      - name: Install dependencies
+        run: npm install
+
+      - name: Linting Fix
+        run: npm run lint:fix
+
+#      - name: Typecheck
+#        run: npm run typecheck
+
+#      - name: Test
+#        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Notify Slack - Build Status on Ubuntu
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          channel: '#fullstack-archtecture'
+          status: ${{ job.status }}
+          message: 'Build on Ubuntu Node.js ${{ matrix.node-version }} - ${{ job.status }}'
+        if: always()
+
+  build-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+      fail-fast: false
+    env:
+      # DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      # SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Starting Build on macOS
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: starting
+          channel: '#fullstack-archtecture'
+          message: 'Starting Build on macOS Node.js ${{ matrix.node-version }}...'
+        if: always()
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-${{ matrix.node-version }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ matrix.node-version }}-
+      - name: Install dependencies
+        run: npm install
+
+      - name: Linting Fix
+        run: npm run lint:fix
+
+#      - name: Typecheck
+#        run: npm run typecheck
+
+#      - name: Test
+#        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Notify Slack - Build Status on macOS
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          channel: '#fullstack-archtecture'
+          status: ${{ job.status }}
+          message: 'Build on macOS Node.js ${{ matrix.node-version }} - ${{ job.status }}'
+        if: always()
+
+  build-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+      fail-fast: false
+    env:
+      # DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      # SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Starting Build on Windows
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: starting
+          channel: '#fullstack-archtecture'
+          message: 'Starting Build on Windows Node.js ${{ matrix.node-version }}...'
+        if: always()
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}-${{ matrix.node-version }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ matrix.node-version }}-
+      - name: Install dependencies
+        run: npm install
+
+      - name: Linting Fix
+        run: npm run lint:fix
+
+#      - name: Typecheck
+#        run: npm run typecheck
+
+#      - name: Test
+#        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Notify Slack - Build Status on Windows
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          channel: '#fullstack-archtecture'
+          status: ${{ job.status }}
+          message: 'Build on Windows Node.js ${{ matrix.node-version }} - ${{ job.status }}'
+        if: always()
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-ubuntu, build-macos, build-windows]
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Starting Deployment
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: starting
+          channel: '#fullstack-archtecture'
+          message: 'Starting Deployment...'
+        if: always()
+
+  slack:
+    runs-on: ubuntu-latest
+    needs: [build-ubuntu, build-macos, build-windows]
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Deployment Status
+        uses: act10ns/slack@v2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          channel: '#fullstack-archtecture'
+          status: ${{ job.status }}
+          message: 'Deployment Status - ${{ job.status }}'
+        if: always()

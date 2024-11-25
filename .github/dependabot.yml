@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly  # Verificar semanalmente
+      day: friday # Executar nas sextas-feiras
+      time: '20:00' # Horário UTC
+    open-pull-requests-limit: 1 # Limitar a 1 PR aberta
+    allow:
+      - dependency-type: 'direct' # Somente atualizações de dependências diretas
+    ignore:
+      - dependency-name: 'deprecated-package' # Ignorar pacotes obsoletos
+    assignees:
+      - Tonybsilva-dev
+    commit-message:
+      prefix: '[DEPENDABOT]'
+      include: scope # Inclui escopo no commit
+    groups:
+      dev-dependencies:
+        patterns:
+          - 'eslint*'
+          - 'webpack*'
