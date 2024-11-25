@@ -38,7 +38,7 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
                 {t('manage-store')}
               </Typography>
               <Typography variant="body1" className="mt-3 text-gray-500">
-                {t('description')}
+                {t('description', { NAME_APPLICATION })}
               </Typography>
               <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
                 <form
