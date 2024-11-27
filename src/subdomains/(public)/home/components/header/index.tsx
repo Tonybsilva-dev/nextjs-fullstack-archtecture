@@ -20,9 +20,9 @@ export default function HeaderHomePage() {
   ];
 
   const COMP = isMobile ? (
-    <HeaderHomeMobile links={navLinks} />
+    <HeaderHomeMobile links={navLinks} params={{ translations: t }} />
   ) : (
-    <HeaderHome links={navLinks} />
+    <HeaderHome links={navLinks} params={{ translations: t }} />
   );
 
   return (

@@ -1,25 +1,24 @@
-import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 
-const LanguageSwitcher = dynamic(
-  () =>
-    import('@/shared/modules/components/custom/language-switcher').then(
-      (mod) => mod.LanguageSwitcher
-    ),
+const LanguageSwitcher = dynamic(() =>
+  import('@/shared/modules/components/custom/language-switcher').then(
+    (mod) => mod.LanguageSwitcher
+  )
+);
+
+const SignInButton = dynamic(
+  () => import('./sign-in-button').then((mod) => mod.SignInButton),
   { ssr: false }
 );
 
-import dynamic from 'next/dynamic';
-
 import { CustomLink } from '@/shared/modules/components/custom/link';
-import { Button } from '@/shared/modules/components/ui/button';
+import { PageProps } from '@/shared/modules/types/page-props';
 
-interface HeaderHomeProps {
+interface HeaderHomeProps extends PageProps {
   links: Array<{ href: string; label: string }>;
 }
 
 export const HeaderHome = ({ links }: HeaderHomeProps) => {
-  const t = useTranslations('components.header-home');
-
   return (
     <nav className="hidden gap-4 sm:gap-6 md:flex">
       {links.map((link) => (
@@ -32,7 +31,9 @@ export const HeaderHome = ({ links }: HeaderHomeProps) => {
         </CustomLink>
       ))}
       <LanguageSwitcher />
-      <Button className="-ml-4">{t('login')}</Button>
+      <div className="-ml-4">
+        <SignInButton />
+      </div>
     </nav>
   );
 };

@@ -88,7 +88,36 @@
         "benefits": "Benefits",
         "contact": "Contact"
       },
-      "login": "Login"
+      "sheet": {
+        "title": "MENU",
+        "sr-only": {
+          "title": "Menu"
+        }
+      },
+      "login": "Login",
+      "sign-in": {
+        "title": "Access",
+        "subtitle": "How would you like to log in?",
+        "buttons": {
+          "admin": "I’m an Administrator",
+          "customer": "I’m a Customer"
+        }
+      }
+    },
+    "login-form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "name@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "show": "Show password",
+        "hide": "Hide password"
+      },
+      "remember-me": "Remember me",
+      "forgot-password": "Forgot your password?",
+      "submit": "Sign in"
     }
   }
 }

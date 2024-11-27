@@ -9,6 +9,7 @@ import { getMessages } from 'next-intl/server';
 
 import { routing } from '@/i18n/routing';
 import { metadataConfig } from '@/shared/config/metadata';
+import { FeedbackWidget } from '@/shared/modules/components/custom/Feedback';
 
 export const metadata: Metadata = metadataConfig;
 
@@ -37,6 +38,7 @@ export default async function RootLayout({
         <main>
           <NextIntlClientProvider messages={messages}>
             {children}
+            <FeedbackWidget />
             <Analytics />
           </NextIntlClientProvider>
         </main>
