@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { CustomLink } from '@/shared/modules/components/custom/link';
+import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Button } from '@/shared/modules/components/ui/button';
 import { Checkbox } from '@/shared/modules/components/ui/checkbox';
 import { Input } from '@/shared/modules/components/ui/input';
@@ -40,7 +41,6 @@ export default function LoginForm() {
             autoComplete="email"
             autoCorrect="off"
             disabled={isLoading}
-            required
             className="pl-10"
           />
           <MailIcon
@@ -66,8 +66,10 @@ export default function LoginForm() {
             className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400"
             aria-hidden="true"
           />
-          <button
+          <Button
             type="button"
+            size={'icon'}
+            variant={'link'}
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-400 hover:text-gray-600"
             aria-label={showPassword ? t('password.hide') : t('password.show')}
@@ -77,7 +79,7 @@ export default function LoginForm() {
             ) : (
               <EyeIcon className="h-5 w-5" />
             )}
-          </button>
+          </Button>
         </div>
       </div>
       <div className="flex items-center justify-between">
@@ -91,14 +93,20 @@ export default function LoginForm() {
           {t('forgot-password')}
         </CustomLink>
       </div>
-      <Button
-        type="submit"
-        disabled={isLoading}
-        isLoading={isLoading}
-        className="w-full"
-      >
-        {t('submit')}
-      </Button>
+
+      <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <div className="hidden md:block">
+          <BackButton className="w-full sm:w-10" />
+        </div>
+        <Button
+          type="submit"
+          disabled={isLoading}
+          isLoading={isLoading}
+          className="w-full"
+        >
+          {t('submit')}
+        </Button>
+      </div>
     </form>
   );
 }
