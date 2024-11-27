@@ -1,6 +1,11 @@
+import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 
-import { LanguageSwitcher } from '@/shared/modules/components/custom/language-switcher';
+const LanguageSwitcher = dynamic(() =>
+  import('@/shared/modules/components/custom/language-switcher').then(
+    (mod) => mod.LanguageSwitcher
+  )
+);
 import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Typography } from '@/shared/modules/components/ui/typography';
 import {
@@ -8,9 +13,20 @@ import {
   LAST_UPDATED_APPLICATION,
   NAME_APPLICATION,
 } from '@/shared/modules/constants/application.constants';
+import { useBreakpoint } from '@/shared/modules/hooks/use-breakpoint';
 
 export const TermsAndConditionsView = () => {
   const t = useTranslations('terms-and-conditions');
+  const isMobile = useBreakpoint();
+
+  const COMP = isMobile ? (
+    <LanguageSwitcher compact />
+  ) : (
+    <div className="min-w-[140px]">
+      <LanguageSwitcher />
+    </div>
+  );
+
   return (
     <main
       className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 md:px-8 md:py-24"
@@ -18,7 +34,7 @@ export const TermsAndConditionsView = () => {
     >
       <div className="mb-6 flex w-full items-center justify-between">
         <BackButton />
-        <LanguageSwitcher />
+        {COMP}
       </div>
       <div className="space-y-8">
         <header>

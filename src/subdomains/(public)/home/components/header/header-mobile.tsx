@@ -1,17 +1,13 @@
 'use client';
-
 import { MenuIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-const LanguageSwitcher = dynamic(
-  () =>
-    import('@/shared/modules/components/custom/language-switcher').then(
-      (mod) => mod.LanguageSwitcher
-    ),
-  { ssr: false }
+const LanguageSwitcher = dynamic(() =>
+  import('@/shared/modules/components/custom/language-switcher').then(
+    (mod) => mod.LanguageSwitcher
+  )
 );
-import dynamic from 'next/dynamic';
 
 import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
@@ -22,13 +18,16 @@ import {
   SheetTrigger,
 } from '@/shared/modules/components/ui/sheet';
 import { Typography } from '@/shared/modules/components/ui/typography';
+import { PageProps } from '@/shared/modules/types/page-props';
 
-interface HeaderHomeMobileProps {
+import { SignInButton } from './sign-in-button';
+
+interface HeaderHomeMobileProps extends PageProps {
   links: Array<{ href: string; label: string }>;
 }
 
-export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
-  const t = useTranslations('components.header-home');
+export const HeaderHomeMobile = ({ links, params }: HeaderHomeMobileProps) => {
+  const { translations: t } = params;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,12 +36,12 @@ export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="md:hidden">
           <MenuIcon className="h-6 w-6" />
-          <span className="sr-only">Abrir menu</span>
+          <span className="sr-only">{t('sheet.sr-only.title')}</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col">
         <div className="mt-8 flex items-center justify-between">
-          <Typography variant={'h4'}>MENU</Typography>
+          <Typography variant={'h4'}>{t('sheet.title')}</Typography>
           <LanguageSwitcher compact />
         </div>
         <Separator className="my-4" />
@@ -62,9 +61,9 @@ export const HeaderHomeMobile = ({ links }: HeaderHomeMobileProps) => {
             </CustomLink>
           ))}
         </nav>
-        <div className="mt-auto">
+        <div className="mt-auto w-full">
           <Separator className="my-4" />
-          <Button className="w-full">{t('login')}</Button>
+          <SignInButton />
         </div>
       </SheetContent>
     </Sheet>

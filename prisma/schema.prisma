@@ -3,13 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
+enum AccountType {
+  ADMIN
+  OWNER
+  CUSTOMER
+}
+
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @map("user_id") @db.ObjectId
+  id                String  @id @default(uuid()) @map("_id") @db.Uuid
+  userId            String  @map("user_id") @db.Uuid
   type              String  @map("type")
   provider          String  @map("provider")
   providerAccountId String  @map("provider_account_id")
@@ -28,9 +34,9 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(uuid()) @map("_id") @db.Uuid
   sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id") @db.ObjectId
+  userId       String   @map("user_id") @db.Uuid
   expires      DateTime @map("expires")
   user         User     @relation(fields: [userId], references: [id])
 
@@ -38,7 +44,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(uuid()) @map("_id") @db.Uuid
   name          String?   @map("name")
   email         String?   @unique @map("email")
   emailVerified DateTime? @map("email_verified")
@@ -50,7 +56,7 @@ model User {
 }
 
 model VerificationToken {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(uuid()) @map("_id") @db.Uuid
   identifier String   @map("identifier")
   token      String   @map("token")
   expires    DateTime @map("expires")

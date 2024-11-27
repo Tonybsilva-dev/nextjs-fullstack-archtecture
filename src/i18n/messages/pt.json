@@ -88,7 +88,36 @@
         "benefits": "Benefícios",
         "contact": "Contato"
       },
-      "login": "Entrar"
+      "sheet": {
+        "title": "MENU",
+        "sr-only": {
+          "title": "Menu"
+        }
+      },
+      "login": "Entrar",
+      "sign-in": {
+        "title": "Acessar",
+        "subtitle": "Como deseja realizar seu acesso?",
+        "buttons": {
+          "admin": "Sou administrador",
+          "customer": "Sou cliente"
+        }
+      }
+    },
+    "login-form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "nome@exemplo.com"
+      },
+      "password": {
+        "label": "Senha",
+        "placeholder": "••••••••",
+        "show": "Mostrar senha",
+        "hide": "Esconder senha"
+      },
+      "remember-me": "Lembrar-me",
+      "forgot-password": "Esqueceu sua senha?",
+      "submit": "Entrar"
     }
   }
 }
