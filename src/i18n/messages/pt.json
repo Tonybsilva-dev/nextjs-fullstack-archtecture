@@ -118,6 +118,34 @@
       "remember-me": "Lembrar-me",
       "forgot-password": "Esqueceu sua senha?",
       "submit": "Entrar"
+    },
+    "feedback-widget": {
+      "header": {
+        "title": "Envie seu feedback",
+        "back-button": "Voltar",
+        "close-button": "Fechar"
+      },
+      "type-step": {
+        "bug": "Reportar um bug",
+        "idea": "Sugerir uma ideia",
+        "other": "Outro feedback"
+      },
+      "form-step": {
+        "email-placeholder": "Seu e-mail",
+        "description-placeholder": "Descreva seu feedback...",
+        "experience-label": "Como foi sua experiência?",
+        "emojis": {
+          "very-bad": "Muito ruim",
+          "bad": "Ruim",
+          "neutral": "Neutra",
+          "good": "Boa",
+          "very-good": "Muito boa"
+        },
+        "buttons": {
+          "add-screenshot": "Adicionar captura de tela",
+          "submit": "Enviar feedback"
+        }
+      }
     }
   }
 }

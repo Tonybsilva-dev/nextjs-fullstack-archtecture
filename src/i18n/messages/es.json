@@ -118,6 +118,34 @@
       "remember-me": "Recuérdame",
       "forgot-password": "¿Olvidaste tu contraseña?",
       "submit": "Iniciar sesión"
+    },
+    "feedback-widget": {
+      "header": {
+        "title": "Envíe su comentario",
+        "back-button": "Volver",
+        "close-button": "Cerrar"
+      },
+      "type-step": {
+        "bug": "Informar un error",
+        "idea": "Sugerir una idea",
+        "other": "Otro comentario"
+      },
+      "form-step": {
+        "email-placeholder": "Su correo electrónico",
+        "description-placeholder": "Describa su comentario...",
+        "experience-label": "¿Cómo fue su experiencia?",
+        "emojis": {
+          "very-bad": "Muy mala",
+          "bad": "Mala",
+          "neutral": "Neutral",
+          "good": "Buena",
+          "very-good": "Muy buena"
+        },
+        "buttons": {
+          "add-screenshot": "Añadir captura de pantalla",
+          "submit": "Enviar comentario"
+        }
+      }
     }
   }
 }
