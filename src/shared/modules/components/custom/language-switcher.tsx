@@ -109,7 +109,7 @@ export function LanguageSwitcher({ compact }: LanguageSwitcherProps) {
                 {compact ? (
                   <div className="flex items-center justify-center gap-2">
                     <div className="flex-shrink-0">{renderFlag(locale)}</div>
-                    <Typography variant={'overline'}>
+                    <Typography variant={'body2'}>
                       {locale.toUpperCase()}
                     </Typography>
                   </div>
