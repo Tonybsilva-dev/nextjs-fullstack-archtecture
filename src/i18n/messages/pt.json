@@ -15,14 +15,22 @@
     "description": "Feito para todos os tamanhos de loja, o {NAME_APPLICATION} é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
     "email-placeholder": "Digite aqui seu melhor e-mail",
     "cta-button": "USE DE GRAÇA AGORA",
-    "feature": {
-      "features-title": "Recursos Principais",
-      "clients-title": "Gestão de Clientes",
-      "clients-description": "Organize e acompanhe informações detalhadas dos clientes, histórico de interações e preferências.",
-      "payments-title": "Processamento de Pagamentos",
-      "payments-description": "Aceite diversos métodos de pagamento e gerencie transações de forma segura e eficiente.",
-      "reports-title": "Relatórios e Análises",
-      "reports-description": "Obtenha insights valiosos com relatórios detalhados sobre vendas, clientes e tendências financeiras."
+    "features-section": {
+      "title": "Principais Funcionalidades",
+      "features": {
+        "client-management": {
+          "title": "Gerenciamento Eficiente de Clientes",
+          "description": "Organize e gerencie contas de clientes facilmente com ferramentas avançadas de categorização."
+        },
+        "data-security": {
+          "title": "Armazenamento Seguro de Dados",
+          "description": "Proteja informações sensíveis de clientes com segurança de ponta e criptografia."
+        },
+        "analytics": {
+          "title": "Análises em Tempo Real",
+          "description": "Obtenha insights acionáveis com análises em tempo real sobre atividades e dados dos clientes."
+        }
+      }
     },
     "contact-title": "Pronto para começar?",
     "contact-description": "Entre em contato conosco para uma demonstração gratuita ou para começar a usar nossa plataforma hoje mesmo.",
