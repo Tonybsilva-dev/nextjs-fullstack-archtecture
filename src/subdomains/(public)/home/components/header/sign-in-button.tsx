@@ -40,10 +40,10 @@ export const SignInButton: React.FC = () => {
       >
         <div className="grid gap-4">
           <div className="space-y-1">
-            <Typography id="sign-in-title" variant={'h6'}>
+            <Typography id="sign-in-title" variant={'h5'}>
               {t('sign-in.title')}
             </Typography>
-            <Typography id="sign-in-subtitle" variant={'body3'}>
+            <Typography id="sign-in-subtitle" variant={'body2'}>
               {t('sign-in.subtitle')}
             </Typography>
           </div>
@@ -63,7 +63,7 @@ export const SignInButton: React.FC = () => {
                   />
                 </div>
                 <span className="flex-grow">
-                  <Typography className="text-center" variant={'body3'}>
+                  <Typography className="text-center" variant={'body2'}>
                     {t('sign-in.buttons.admin')}
                   </Typography>
                 </span>
@@ -83,7 +83,7 @@ export const SignInButton: React.FC = () => {
                 />
               </div>
               <span className="flex-grow">
-                <Typography className="text-center" variant={'body3'}>
+                <Typography className="text-center" variant={'body2'}>
                   {t('sign-in.buttons.customer')}
                 </Typography>
               </span>
