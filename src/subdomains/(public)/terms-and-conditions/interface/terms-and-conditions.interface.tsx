@@ -41,7 +41,7 @@ export const TermsAndConditionsView = () => {
           <Typography
             id="terms-heading"
             className="text-center sm:text-4xl md:text-5xl"
-            variant={'h1'}
+            variant={'h2'}
           >
             {t('title')}
           </Typography>
@@ -54,7 +54,7 @@ export const TermsAndConditionsView = () => {
             <Typography variant={'h4'} id="user-responsibilities">
               {t('sections.user-responsibilities.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.user-responsibilities.content', {
                 NAME_APPLICATION,
               })}
@@ -64,7 +64,7 @@ export const TermsAndConditionsView = () => {
             <Typography variant={'h4'} id="data-privacy">
               {t('sections.data-privacy.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.data-privacy.content')}
             </Typography>
           </section>
@@ -72,7 +72,7 @@ export const TermsAndConditionsView = () => {
             <Typography variant={'h4'} id="intellectual-property">
               {t('sections.intellectual-property.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.intellectual-property.content', {
                 NAME_APPLICATION,
               })}
@@ -82,7 +82,7 @@ export const TermsAndConditionsView = () => {
             <Typography id="liability-limitations" variant={'h4'}>
               {t('sections.liability-limitations.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.liability-limitations.content', {
                 NAME_APPLICATION,
               })}
@@ -92,7 +92,7 @@ export const TermsAndConditionsView = () => {
             <Typography id="terms-changes" variant={'h4'}>
               {t('sections.terms-changes.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.terms-changes.content')}
             </Typography>
           </section>
@@ -100,7 +100,7 @@ export const TermsAndConditionsView = () => {
             <Typography id="contact-us" variant={'h4'}>
               {t('sections.contact-us.heading')}
             </Typography>
-            <Typography variant={'body3'} color={'description'}>
+            <Typography variant={'body2'} color={'description'}>
               {t('sections.contact-us.content', { EMAIL_CONTACT_APPLICATION })}
             </Typography>
           </section>

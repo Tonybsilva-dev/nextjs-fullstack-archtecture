@@ -15,14 +15,22 @@
     "description": "Hecho para todos los tamaños de tiendas, {NAME_APPLICATION} es gratuito y te ayuda a tener el control de todo sin perder el enfoque en lo más importante: vender.",
     "email-placeholder": "Ingresa tu mejor correo electrónico aquí",
     "cta-button": "¡USA GRATIS AHORA!",
-    "feature": {
-      "features-title": "Características Principales",
-      "clients-title": "Gestión de Clientes",
-      "clients-description": "Organiza y sigue información detallada de los clientes, historial de interacciones y preferencias.",
-      "payments-title": "Procesamiento de Pagos",
-      "payments-description": "Acepta diversos métodos de pago y gestiona transacciones de forma segura y eficiente.",
-      "reports-title": "Informes y Análisis",
-      "reports-description": "Obtén valiosos insights con informes detallados sobre ventas, clientes y tendencias financieras."
+    "features-section": {
+      "title": "Características Clave",
+      "features": {
+        "client-management": {
+          "title": "Gestión Eficiente de Clientes",
+          "description": "Organice y gestione cuentas de clientes fácilmente con herramientas avanzadas de categorización."
+        },
+        "data-security": {
+          "title": "Almacenamiento Seguro de Datos",
+          "description": "Proteja la información sensible de los clientes con seguridad de alta calidad y cifrado."
+        },
+        "analytics": {
+          "title": "Análisis en Tiempo Real",
+          "description": "Obtenga información práctica con análisis en tiempo real sobre la actividad y los datos de los clientes."
+        }
+      }
     },
     "contact-title": "¿Listo para comenzar?",
     "contact-description": "Ponte en contacto con nosotros para una demostración gratuita o para comenzar a usar nuestra plataforma hoy mismo.",

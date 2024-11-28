@@ -1,112 +1,154 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Checkbox } from '@radix-ui/react-checkbox';
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { CustomLink } from '@/shared/modules/components/custom/link';
-import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Button } from '@/shared/modules/components/ui/button';
-import { Checkbox } from '@/shared/modules/components/ui/checkbox';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/shared/modules/components/ui/form';
 import { Input } from '@/shared/modules/components/ui/input';
-import { Label } from '@/shared/modules/components/ui/label';
+
+const formSchema = z.object({
+  email: z.string().email({ message: 'Insira um email válido' }),
+  password: z
+    .string()
+    .min(6, { message: 'A senha deve ter no mínimo 6 caracteres' }),
+  rememberMe: z.boolean().optional(),
+});
+
+type LoginFormValues = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const t = useTranslations('components.login-form');
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
 
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push('/dashboard');
-    }, 3000);
+  function onSubmit(values: LoginFormValues) {
+    console.log(values);
+    router.push('/dashboard');
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div className="space-y-2">
-        <Label htmlFor="email">{t('email.label')}</Label>
-        <div className="relative">
-          <Input
-            id="email"
-            placeholder={t('email.placeholder')}
-            type="email"
-            autoCapitalize="none"
-            autoComplete="email"
-            autoCorrect="off"
-            disabled={isLoading}
-            className="pl-10"
-          />
-          <MailIcon
-            className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400"
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="password">{t('password.label')}</Label>
-        <div className="relative">
-          <Input
-            id="password"
-            placeholder={t('password.placeholder')}
-            type={showPassword ? 'text' : 'password'}
-            autoCapitalize="none"
-            autoComplete="current-password"
-            disabled={isLoading}
-            required
-            className="pl-10"
-          />
-          <LockIcon
-            className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400"
-            aria-hidden="true"
-          />
-          <Button
-            type="button"
-            size={'icon'}
-            variant={'link'}
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-400 hover:text-gray-600"
-            aria-label={showPassword ? t('password.hide') : t('password.show')}
-          >
-            {showPassword ? (
-              <EyeOffIcon className="h-5 w-5" />
-            ) : (
-              <EyeIcon className="h-5 w-5" />
-            )}
-          </Button>
-        </div>
-      </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <Checkbox id="remember-me" name="remember-me" disabled={isLoading} />
-          <Label htmlFor="remember-me" className="ml-2 cursor-pointer text-sm">
-            {t('remember-me')}
-          </Label>
-        </div>
-        <CustomLink href="#" className="text-sm font-medium text-primary">
-          {t('forgot-password')}
-        </CustomLink>
-      </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Campo de Email */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('email.label')}</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    className="pl-10"
+                    placeholder={t('email.placeholder')}
+                    {...field}
+                  />
+                  <MailIcon
+                    className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400"
+                    aria-hidden="true"
+                  />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-        <div className="hidden md:block">
-          <BackButton className="w-full sm:w-10" />
+        {/* Campo de Senha */}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('password.label')}</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    className="pl-10"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={t('password.placeholder')}
+                    {...field}
+                  />
+                  <LockIcon
+                    className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400"
+                    aria-hidden="true"
+                  />
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant="link"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-400 hover:text-gray-600"
+                    aria-label={
+                      showPassword ? t('password.hide') : t('password.show')
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="h-5 w-5" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5" />
+                    )}
+                  </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Lembre-me e Esqueci a Senha */}
+        <div className="flex items-center justify-between">
+          <FormField
+            control={form.control}
+            name="rememberMe"
+            render={({ field }) => (
+              <div className="flex items-center">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel className="ml-2 text-sm">
+                  {t('remember-me')}
+                </FormLabel>
+              </div>
+            )}
+          />
+          <CustomLink href="#" className="text-sm font-medium text-primary">
+            {t('forgot-password')}
+          </CustomLink>
         </div>
-        <Button
-          type="submit"
-          disabled={isLoading}
-          isLoading={isLoading}
-          className="w-full"
-        >
+
+        {/* Botão de Submissão */}
+        <Button type="submit" className="w-full">
           {t('submit')}
         </Button>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 }

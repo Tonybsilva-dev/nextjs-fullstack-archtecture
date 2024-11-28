@@ -10,6 +10,7 @@ import { Typography } from '@/shared/modules/components/ui/typography';
 import { NAME_APPLICATION } from '@/shared/modules/constants/application.constants';
 import { PageProps } from '@/shared/modules/types/page-props';
 
+import { FeatureSectionHome } from '../components/feature-section';
 import HeaderHomePage from '../components/header';
 
 export const HomeView: React.FC<PageProps> = ({ params }) => {
@@ -77,40 +78,8 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
             </div>
           </div>
         </div>
-        <section id="features" className="bg-white py-20">
-          <div className="container mx-auto px-4">
-            <Typography as="h2" variant="h2" className="mb-12 text-center">
-              {t('feature.features-title')}
-            </Typography>
-            <div className="grid gap-12 md:grid-cols-3">
-              <div>
-                <div className="flex items-center justify-center">
-                  <Typography as="h3" variant="h3" className="mb-2">
-                    {t('feature.clients-title')}
-                  </Typography>
-                </div>
-                <Typography variant="body1" className="text-gray-600">
-                  {t('feature.clients-description')}
-                </Typography>
-              </div>
-              <div className="flex flex-col items-center justify-center">
-                <Typography as="h3" variant="h3" className="mb-2">
-                  {t('feature.payments-title')}
-                </Typography>
-                <Typography variant="body1" className="text-gray-600">
-                  {t('feature.payments-description')}
-                </Typography>
-              </div>
-              <div className="flex flex-col items-center justify-center">
-                <Typography as="h3" variant="h3" className="mb-2">
-                  {t('feature.reports-title')}
-                </Typography>
-                <Typography variant="body1" className="text-gray-600">
-                  {t('feature.reports-description')}
-                </Typography>
-              </div>
-            </div>
-          </div>
+        <section id="features" className="flex w-full justify-center">
+          <FeatureSectionHome params={{ translations: t }} />
         </section>
         <section id="contact" className="bg-gray-100 py-20">
           <div className="container mx-auto px-4 text-center">
