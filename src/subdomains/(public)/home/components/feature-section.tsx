@@ -36,7 +36,6 @@ export const FeatureSectionHome: React.FC<PageProps> = ({ params }) => {
               className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
             >
               <div className="mb-4 rounded-full bg-yellow-100 p-3 dark:bg-yellow-900">
-                {/* Adicione o ícone aqui, caso necessário */}
                 {feat.icon}
               </div>
               <h3 className="mb-2 text-xl font-semibold text-gray-800 dark:text-gray-200">
