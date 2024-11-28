@@ -16,9 +16,6 @@ export const SignInView: React.FC<PageProps> = () => {
                 {NAME_APPLICATION}
               </h1>
             </div>
-            <h2 className="mb-6 text-center text-xl font-medium text-gray-600">
-              Bem-vindo de volta! Acesse sua conta
-            </h2>
             <LoginForm />
           </div>
         </div>
