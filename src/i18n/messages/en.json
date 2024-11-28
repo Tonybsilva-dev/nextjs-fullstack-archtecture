@@ -118,6 +118,34 @@
       "remember-me": "Remember me",
       "forgot-password": "Forgot your password?",
       "submit": "Sign in"
+    },
+    "feedback-widget": {
+      "header": {
+        "title": "Send your feedback",
+        "back-button": "Back",
+        "close-button": "Close"
+      },
+      "type-step": {
+        "bug": "Report a bug",
+        "idea": "Suggest an idea",
+        "other": "Other feedback"
+      },
+      "form-step": {
+        "email-placeholder": "Your email",
+        "description-placeholder": "Describe your feedback...",
+        "experience-label": "How was your experience?",
+        "emojis": {
+          "very-bad": "Very bad",
+          "bad": "Bad",
+          "neutral": "Neutral",
+          "good": "Good",
+          "very-good": "Very good"
+        },
+        "buttons": {
+          "add-screenshot": "Add screenshot",
+          "submit": "Submit feedback"
+        }
+      }
     }
   }
 }

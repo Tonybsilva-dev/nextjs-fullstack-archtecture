@@ -7,12 +7,14 @@ import {
   SmileIcon,
   SmilePlusIcon,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '../../ui/button';
 import Iconify from '../../ui/iconify';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 import { RadioGroup, RadioGroupItem } from '../../ui/radio-group';
+import { Separator } from '../../ui/separator';
 import { Textarea } from '../../ui/textarea';
 
 const emojis = [
@@ -40,6 +42,8 @@ export function FeedbackFormStep({
   setExperience: (value: string) => void;
   onSubmit: () => void;
 }) {
+  const t = useTranslations('components.feedback-widget.form-step');
+
   return (
     <form
       onSubmit={(e) => {
@@ -50,19 +54,22 @@ export function FeedbackFormStep({
     >
       <Input
         type="email"
-        placeholder="Seu e-mail"
+        placeholder={t('email-placeholder')}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
       />
       <Textarea
-        placeholder="Descreva seu feedback..."
+        placeholder={t('description-placeholder')}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
       />
+      <Separator />
       <div>
-        <Label className="mb-2 block">Como foi sua experiência?</Label>
+        <Label className="mb-2 block text-center">
+          {t('experience-label')}
+        </Label>
         <RadioGroup
           className="flex justify-between"
           value={experience || ''}
@@ -85,13 +92,16 @@ export function FeedbackFormStep({
           ))}
         </RadioGroup>
       </div>
+      <Separator />
       <div className="flex gap-2">
-        <Button size={'icon'} className="px-3">
+        <Button size={'icon'} className="px-3" variant={'outline'}>
           <Iconify icon={CameraIcon} />
+          <span className="sr-only">{t('buttons.add-screenshot')}</span>
         </Button>
         <Button type="submit" className="w-full">
+          <span className="sr-only">{t('buttons.submit')}</span>
           <SendIcon className="mr-2 h-4 w-4" />
-          Enviar feedback
+          {t('buttons.submit')}
         </Button>
       </div>
     </form>
