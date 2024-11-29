@@ -1,5 +1,4 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { AccountType } from '@prisma/client';
 import { NextAuthOptions } from 'next-auth';
 import { Adapter } from 'next-auth/adapters';
 import Credentials from 'next-auth/providers/credentials';
@@ -79,7 +78,7 @@ export const authOptions: NextAuthOptions = {
 
         if (!isValidPassword) throw new Error('Credenciais inválidas');
 
-        const role = user.accounts[0]?.type || AccountType.CUSTOMER;
+        const role = user.accounts[0]?.type || 'CUSTOMER';
         const tenantId = user.tenant?.id || undefined;
 
         return { ...user, role, context: { tenantId } };
@@ -102,7 +101,7 @@ export const authOptions: NextAuthOptions = {
               image: user.image,
               accounts: {
                 create: {
-                  type: AccountType.CUSTOMER,
+                  type: 'CUSTOMER',
                   provider: account.provider,
                   providerAccountId: account.providerAccountId,
                 },
@@ -135,7 +134,7 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
-          token.role = userFromDb?.accounts[0]?.type || AccountType.CUSTOMER;
+          token.role = userFromDb?.accounts[0]?.type || 'CUSTOMER';
 
           const tenantId = userFromDb?.tenant?.id || undefined;
           token.context = { tenantId, storeId: undefined };
