@@ -51,6 +51,7 @@ export const authOptions: NextAuthOptions = {
             image: true,
             createdAt: true,
             updatedAt: true,
+            deletedAt: true,
             tenant: {
               select: {
                 id: true,

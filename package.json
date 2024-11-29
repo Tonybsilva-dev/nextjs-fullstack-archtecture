@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='${NODE_DEBUG:-}' next dev",
-    "build": "next build",
+    "build": "npm run generate && next build",
     "start": "next start",
     "prepare": "husky install",
+    "generate": "npx prisma generate",
     "format": "prettier --write .",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix"
