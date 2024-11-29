@@ -1,4 +1,3 @@
-import { AccountType } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import createMiddleware from 'next-intl/middleware';
@@ -15,28 +14,20 @@ export default async function middleware(req: NextRequest) {
   // Token do next-auth (verifica autenticação)
   const token = await getToken({ req });
   const isLoggedIn = !!token;
-  const role = token?.role || AccountType.CUSTOMER;
+  const role = token?.role || 'CUSTOMER';
   const storeId = token?.context?.storeId;
 
   // Caso seja OWNER e não tenha uma loja, redirecionar para a página de Setup
-  if (
-    role === AccountType.OWNER &&
-    !storeId &&
-    !pathname.startsWith('/setup')
-  ) {
+  if (role === 'OWNER' && !storeId && !pathname.startsWith('/setup')) {
     return NextResponse.redirect(new URL('/setup', req.url));
   }
 
   // Redirecionamento para OWNER logado
-  if (pathname === '/' && isLoggedIn && role === AccountType.OWNER) {
+  if (pathname === '/' && isLoggedIn && role === 'OWNER') {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
-  if (
-    pathname.startsWith('/dashboard') &&
-    isLoggedIn &&
-    role !== AccountType.OWNER
-  ) {
+  if (pathname.startsWith('/dashboard') && isLoggedIn && role !== 'OWNER') {
     return NextResponse.redirect(new URL('/catalog', req.url));
   }
 
