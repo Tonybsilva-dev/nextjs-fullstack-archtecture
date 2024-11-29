@@ -74,11 +74,7 @@ export const SignInButton: React.FC = () => {
               variant="outline"
               className="relative flex w-full items-center rounded-md border border-gray-300 px-4 py-2"
               aria-label={t('sign-in.buttons.customer')}
-              onClick={() =>
-                signIn('google', {
-                  redirect: false,
-                })
-              }
+              onClick={() => signIn('google')}
             >
               <div className="absolute left-4">
                 <Image
