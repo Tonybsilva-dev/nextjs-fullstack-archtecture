@@ -2,6 +2,7 @@
 
 import { CrownIcon } from 'lucide-react';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import GOOGLE_ICON from '@/assets/icons/google.png';
@@ -73,6 +74,7 @@ export const SignInButton: React.FC = () => {
               variant="outline"
               className="relative flex w-full items-center rounded-md border border-gray-300 px-4 py-2"
               aria-label={t('sign-in.buttons.customer')}
+              onClick={() => signIn('google')}
             >
               <div className="absolute left-4">
                 <Image

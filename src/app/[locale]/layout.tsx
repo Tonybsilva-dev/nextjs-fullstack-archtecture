@@ -10,6 +10,7 @@ import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { metadataConfig } from '@/shared/config/metadata';
 import { FeedbackWidget } from '@/shared/modules/components/custom/Feedback';
+import AuthProvider from '@/shared/modules/providers/auth-provider';
 
 export const metadata: Metadata = metadataConfig;
 
@@ -37,8 +38,10 @@ export default async function RootLayout({
       <body className={`${ubuntu.className} antialiased`}>
         <main>
           <NextIntlClientProvider messages={messages}>
-            {children}
-            <FeedbackWidget />
+            <AuthProvider>
+              {children}
+              <FeedbackWidget />
+            </AuthProvider>
             <Analytics />
           </NextIntlClientProvider>
         </main>
