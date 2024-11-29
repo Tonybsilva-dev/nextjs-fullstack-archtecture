@@ -76,7 +76,7 @@ export const SignInButton: React.FC = () => {
               aria-label={t('sign-in.buttons.customer')}
               onClick={() =>
                 signIn('google', {
-                  redirect: false,
+                  callbackUrl: '/',
                 })
               }
             >
