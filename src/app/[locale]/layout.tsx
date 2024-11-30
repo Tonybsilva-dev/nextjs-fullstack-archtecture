@@ -36,15 +36,15 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${ubuntu.className} antialiased`}>
-        <main>
-          <NextIntlClientProvider messages={messages}>
-            <AuthProvider>
+        <AuthProvider>
+          <main>
+            <NextIntlClientProvider messages={messages}>
               {children}
               <FeedbackWidget />
-            </AuthProvider>
+            </NextIntlClientProvider>
             <Analytics />
-          </NextIntlClientProvider>
-        </main>
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );
