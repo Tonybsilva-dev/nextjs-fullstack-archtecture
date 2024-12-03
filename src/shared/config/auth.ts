@@ -49,7 +49,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Error user credentials validation');
         }
 
-        // Busca o usuário com Tenant e AccountType
         const user = await db.user.findUnique({
           where: { email: parsedCredentials.data.email },
           select: {
