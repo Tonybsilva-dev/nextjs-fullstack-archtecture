@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { CustomLink } from '@/shared/modules/components/custom/link';
 import { Button } from '@/shared/modules/components/ui/button';
@@ -14,13 +16,15 @@ import {
 } from '@/shared/modules/components/ui/form';
 import { Input } from '@/shared/modules/components/ui/input';
 import { PageProps } from '@/shared/modules/types/page-props';
+import { AppError } from '@/shared/modules/utils/errors';
+import { formatDate } from '@/shared/modules/utils/format-date';
 
 import {
   SignInFormValues,
   signInZodSchema,
 } from '../validations/sign-in.validation';
 
-const SignInForm: React.FC<PageProps> = ({ params }) => {
+const SignInForm: React.FC<PageProps> = ({ params, router }) => {
   const { translations: t } = params;
 
   const schema = signInZodSchema(t);
@@ -33,9 +37,31 @@ const SignInForm: React.FC<PageProps> = ({ params }) => {
     },
   });
 
-  const onSubmit = (data: SignInFormValues) => {
-    console.log('Form Submitted:', data);
-    // Coloque aqui a lógica para enviar os dados ao servidor
+  const onSubmit = async (values: SignInFormValues) => {
+    console.log('Form Submitted:', values);
+
+    try {
+      const res = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        toast.error(res.error, {
+          description: formatDate(new Date()),
+        });
+      } else if (router) {
+        router.push('/dashboard');
+      }
+    } catch (error) {
+      const appError = AppError.from(error);
+      appError.logError();
+
+      toast.error(appError.message, {
+        description: formatDate(new Date()),
+      });
+    }
   };
 
   return (
@@ -81,7 +107,12 @@ const SignInForm: React.FC<PageProps> = ({ params }) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full"
+          isLoading={form.formState.isLoading}
+          disabled={form.formState.isSubmitting}
+        >
           {t('sign-in-button')}
         </Button>
       </form>

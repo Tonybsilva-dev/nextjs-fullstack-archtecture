@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'; // Correção: Tipo para Router foi descontinuado, você usará uma função.
+
 /**
  * Tipagem genérica para representar propriedades padrão de uma página.
  *
@@ -106,4 +108,5 @@ export type PageProps<TParams = {}> = {
      */
     [key: string]: string | string[] | undefined;
   };
+  router?: ReturnType<typeof useRouter>;
 };

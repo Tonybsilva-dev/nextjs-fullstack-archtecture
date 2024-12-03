@@ -11,6 +11,8 @@ import {
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
+import locales from '@/assets/icons/locales';
+
 import {
   Select,
   SelectContent,
@@ -59,20 +61,14 @@ export function LanguageSwitcher({ compact }: LanguageSwitcherProps) {
   };
 
   const renderFlag = (locale: Locale) => {
-    const flagMap: Record<Locale, string> = {
-      en: '/locales/en.png',
-      pt: '/locales/pt.png',
-      es: '/locales/es.png',
-    };
-
     return (
       <Image
-        src={flagMap[locale]}
+        src={locales[locale]}
         alt={locale}
         width={24}
         height={24}
         className="rounded-full"
-        loading="eager"
+        loading="lazy"
       />
     );
   };
