@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 import GOOGLE_ICON from '@/assets/icons/google.png';
 import { Button } from '@/shared/modules/components/ui/button';
@@ -7,12 +10,17 @@ import { PageProps } from '@/shared/modules/types/page-props';
 const SignInWithGoogle: React.FC<PageProps> = ({ params }) => {
   const { translations: t } = params;
 
+  const handleSignInGoogle = async () => {
+    await signIn('google', { callbackUrl: '/catalog' });
+  };
+
   return (
     <form>
       <Button
         type="submit"
         className="flex w-full items-center justify-center space-x-2"
         variant="outline"
+        onClick={handleSignInGoogle}
       >
         <Image
           src={GOOGLE_ICON}
