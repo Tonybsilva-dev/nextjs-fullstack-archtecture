@@ -42,6 +42,19 @@
     },
     "image-alt": "Vendedora sonriente en una tienda de ropa"
   },
+  "sign-in": {
+    "title": "Iniciar sesión",
+    "subtitle": "¡Ingrese su correo electrónico y contraseña para iniciar sesión!",
+    "email-label": "Correo electrónico",
+    "password-label": "Contraseña",
+    "forgot-password": "¿Olvidaste tu contraseña?",
+    "sign-in-button": "Iniciar sesión",
+    "sign-in-google": "Soy cliente",
+    "validation": {
+      "email": "Por favor, introduce un correo electrónico válido",
+      "password": "La contraseña debe tener al menos 6 caracteres"
+    }
+  },
   "terms-and-conditions": {
     "title": "Terminos y condiciones",
     "last-updated": "Última actualizacion",

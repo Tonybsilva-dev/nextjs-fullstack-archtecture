@@ -72,6 +72,19 @@
       }
     }
   },
+  "sign-in": {
+    "title": "Sign In",
+    "subtitle": "Enter your email and password to sign in!",
+    "email-label": "Email",
+    "password-label": "Password",
+    "forgot-password": "Forgot your password?",
+    "sign-in-button": "Sign in",
+    "sign-in-google": "I'm a customer",
+    "validation": {
+      "email": "Please enter a valid email",
+      "password": "Password must be at least 6 characters"
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Languages",

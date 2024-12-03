@@ -1,13 +1,11 @@
 import z from 'zod';
 
-export const signInZodSchema = z.object({
-  email: z.string().email(),
-  password: z
-    .string()
-    .min(6, {
-      message: 'Passowrd must be at least 6 characters.',
-    })
-    .max(12),
-});
+export const signInZodSchema = (t: (key: string) => string) => {
+  return z.object({
+    email: z.string().email({ message: t('validation.email') }),
+    password: z.string().min(6, { message: t('validation.password') }),
+    rememberMe: z.boolean().optional(),
+  });
+};
 
-export type SignIn = z.infer<typeof signInZodSchema>;
+export type SignInFormValues = z.infer<ReturnType<typeof signInZodSchema>>;

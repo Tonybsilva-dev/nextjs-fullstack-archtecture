@@ -3,11 +3,20 @@ import { NextAuthOptions } from 'next-auth';
 import { Adapter } from 'next-auth/adapters';
 import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
-
-import { signInZodSchema } from '@/subdomains/(public)/sign-in/validations/sign-in.validation';
+import { z } from 'zod';
 
 import { db } from '../modules/infrastructure/database/prisma';
 import { verifyPassword } from '../modules/utils/crypto';
+
+const signInZodSchema = z.object({
+  email: z.string().email(),
+  password: z
+    .string()
+    .min(6, {
+      message: 'Password must be at least 6 characters.',
+    })
+    .max(12),
+});
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
