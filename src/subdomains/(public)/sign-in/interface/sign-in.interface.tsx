@@ -5,7 +5,7 @@ import { PageProps } from '@/shared/modules/types/page-props';
 import SignInForm from '../components/sign-in-form';
 import SignInWithGoogle from '../components/sign-in-with-google';
 
-export const SignInView: React.FC<PageProps> = ({ params }) => {
+export const SignInView: React.FC<PageProps> = ({ params, router }) => {
   const { translations: t } = params;
 
   return (
@@ -23,7 +23,7 @@ export const SignInView: React.FC<PageProps> = ({ params }) => {
           </p>
           <SignInWithGoogle params={{ translations: t }} />
           <Separator className="my-4" />
-          <SignInForm params={{ translations: t }} />
+          <SignInForm params={{ translations: t }} router={router} />
         </div>
       </div>
     </div>
