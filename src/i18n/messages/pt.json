@@ -42,6 +42,19 @@
     },
     "image-alt": "Vendedora sorrindo em uma loja de roupas"
   },
+  "sign-in": {
+    "title": "Entrar",
+    "subtitle": "Insira seu email e senha para entrar!",
+    "email-label": "Email",
+    "password-label": "Senha",
+    "forgot-password": "Esqueceu sua senha?",
+    "sign-in-button": "Entrar",
+    "sign-in-google": "Sou cliente",
+    "validation": {
+      "email": "Insira um email válido",
+      "password": "A senha deve ter no mínimo 6 caracteres"
+    }
+  },
   "terms-and-conditions": {
     "title": "Termos e condições",
     "last-updated": "Última atualização",

@@ -1,23 +1,29 @@
-import { NAME_APPLICATION } from '@/shared/modules/constants/application.constants';
+import { BackButton } from '@/shared/modules/components/ui/back-button';
+import { Separator } from '@/shared/modules/components/ui/separator';
 import { PageProps } from '@/shared/modules/types/page-props';
 
-import LoginForm from '../components/login-form';
+import SignInForm from '../components/sign-in-form';
+import SignInWithGoogle from '../components/sign-in-with-google';
 
-export const SignInView: React.FC<PageProps> = () => {
+export const SignInView: React.FC<PageProps> = ({ params }) => {
+  const { translations: t } = params;
+
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-r from-zinc-200 via-yellow-200 to-zinc-200 p-4 sm:p-6 lg:p-8">
-      <div className="bg-pattern pointer-events-none absolute inset-0 opacity-20" />
-      <div className="w-full max-w-md">
-        <div className="overflow-hidden rounded-lg bg-white shadow-2xl ring-1 ring-black/5">
-          <div className="p-8">
-            <div className="mb-8 flex flex-col items-center justify-center">
-              <div className="h-[120px] w-[300px] bg-zinc-200" />
-              <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-800">
-                {NAME_APPLICATION}
-              </h1>
-            </div>
-            <LoginForm />
+    <div className="flex h-screen items-center justify-center bg-white">
+      <div className="w-full max-w-[450px] px-5 lg:px-6">
+        <div className="mx-auto my-auto mb-auto flex w-[350px] max-w-[450px] flex-col md:max-w-[450px] lg:max-w-[450px]">
+          <div className="mb-6">
+            <BackButton />
           </div>
+          <h1 className="text-2xl font-bold text-zinc-950 dark:text-white">
+            {t('title')}
+          </h1>
+          <p className="mb-4 mt-2 text-sm text-zinc-950 dark:text-zinc-400">
+            {t('subtitle')}
+          </p>
+          <SignInWithGoogle params={{ translations: t }} />
+          <Separator className="my-4" />
+          <SignInForm params={{ translations: t }} />
         </div>
       </div>
     </div>
