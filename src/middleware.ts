@@ -18,8 +18,14 @@ export default async function middleware(req: NextRequest) {
   const storeId = token?.context?.storeId;
 
   // Caso seja OWNER e não tenha uma loja, redirecionar para a página de Setup
-  if (role === 'OWNER' && !storeId && !pathname.startsWith('/setup')) {
-    return NextResponse.redirect(new URL('/setup', req.url));
+  if (role === 'OWNER' && !storeId) {
+    const locale = req.nextUrl.locale || 'pt';
+    const expectedPath = `/${locale}/setup`;
+
+    // Verifica se a URL já está correta para evitar redirecionamentos circulares
+    if (!pathname.startsWith(expectedPath)) {
+      return NextResponse.redirect(new URL(expectedPath, req.nextUrl.origin));
+    }
   }
 
   // Redirecionamento para OWNER logado
@@ -54,8 +60,3 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };
-
-// export const config = {
-//   // Match only internationalized pathnames
-//   matcher: ['/', '/(pt|en|es)/:path*'],
-// };
