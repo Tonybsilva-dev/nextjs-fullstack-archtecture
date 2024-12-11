@@ -3,8 +3,11 @@ import { formatDate } from '../utils/format-date';
 /* Version Application */
 export const VERSION_APPLICATION = `0.0.1`;
 
+/* Author Name */
+export const AUTHOR_NAME = `Antônio Silva`;
+
 /* Name Application */
-export const NAME_APPLICATION = `Fullstack Archtecture`;
+export const NAME_APPLICATION = `Tempero Tech`;
 
 /* Email Contact Application */
 export const EMAIL_CONTACT_APPLICATION = `contato@antoniobsilva.com.br`;

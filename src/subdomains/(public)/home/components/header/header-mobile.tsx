@@ -1,15 +1,15 @@
 'use client';
+
 import { MenuIcon } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-const LanguageSwitcher = dynamic(() =>
-  import('@/shared/modules/components/custom/language-switcher').then(
-    (mod) => mod.LanguageSwitcher
-  )
-);
-
 import { CustomLink } from '@/shared/modules/components/custom/link';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/shared/modules/components/ui/accordion';
 import { Button } from '@/shared/modules/components/ui/button';
 import { Separator } from '@/shared/modules/components/ui/separator';
 import {
@@ -20,13 +20,17 @@ import {
 import { Typography } from '@/shared/modules/components/ui/typography';
 import { PageProps } from '@/shared/modules/types/page-props';
 
+import { NavigationMenuProps } from './navigation/navigation-menu';
 import { SignInButton } from './sign-in-button';
 
 interface HeaderHomeMobileProps extends PageProps {
-  links: Array<{ href: string; label: string }>;
+  navigation: NavigationMenuProps['sections'];
 }
 
-export const HeaderHomeMobile = ({ links, params }: HeaderHomeMobileProps) => {
+export const HeaderHomeMobile = ({
+  navigation,
+  params,
+}: HeaderHomeMobileProps) => {
   const { translations: t } = params;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,26 +45,33 @@ export const HeaderHomeMobile = ({ links, params }: HeaderHomeMobileProps) => {
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col">
         <div className="mt-8 flex items-center justify-between">
-          <Typography variant={'h4'}>{t('sheet.title')}</Typography>
-          <LanguageSwitcher compact />
+          <Typography variant="h4">{t('sheet.title')}</Typography>
         </div>
         <Separator className="my-4" />
-        <nav className="flex flex-col gap-4">
-          {links.map((link) => (
-            <CustomLink
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-            >
-              <Typography
-                variant={'body1'}
-                className="underline-offset-4 hover:underline"
-              >
-                {link.label}
-              </Typography>
-            </CustomLink>
+
+        <Accordion type="single" collapsible className="w-full">
+          {navigation.map((section, index) => (
+            <AccordionItem key={index} value={`section-${index}`}>
+              <AccordionTrigger>{section.label}</AccordionTrigger>
+              <AccordionContent>
+                <ul className="flex flex-col gap-2 pl-4">
+                  {section.items.map((item) => (
+                    <li key={item.href}>
+                      <CustomLink
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="underline-offset-4 hover:underline"
+                      >
+                        <Typography variant="body1">{item.title}</Typography>
+                      </CustomLink>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </nav>
+        </Accordion>
+
         <div className="mt-auto w-full">
           <Separator className="my-4" />
           <SignInButton />

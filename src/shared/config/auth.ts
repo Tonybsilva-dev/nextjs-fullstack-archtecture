@@ -9,7 +9,7 @@ import { db } from '../modules/infrastructure/database/prisma';
 import { verifyPassword } from '../modules/utils/crypto';
 
 const signInZodSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email({ message: 'Email is required.' }),
   password: z
     .string()
     .min(6, {
@@ -25,9 +25,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signOut: '/',
-  },
+  pages: {},
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -62,6 +60,7 @@ export const authOptions: NextAuthOptions = {
             tenant: {
               select: {
                 id: true,
+                uniqueName: true,
               },
             },
             accounts: {
@@ -77,19 +76,35 @@ export const authOptions: NextAuthOptions = {
           select: { password: true },
         });
 
-        if (!passwordRecord) throw new Error('Credenciais inválidas');
+        if (!passwordRecord)
+          throw new Error('Invalid credentials. (FSA-FAX5P)');
 
         const isValidPassword = await verifyPassword(
           parsedCredentials.data.password,
           passwordRecord.password as string
         );
 
-        if (!isValidPassword) throw new Error('Credenciais inválidas');
+        if (!isValidPassword)
+          throw new Error('Invalid credentials. (FSA-FAX5P)');
 
         const role = user.accounts[0]?.type || 'CUSTOMER';
         const tenantId = user.tenant?.id || undefined;
 
-        return { ...user, role, context: { tenantId } };
+        const company = tenantId
+          ? await db.company.findFirst({
+              where: { tenantId },
+              select: { id: true },
+            })
+          : null;
+
+        return {
+          ...user,
+          role,
+          context: {
+            tenantId,
+            company,
+          },
+        };
       },
     }),
   ],
@@ -127,13 +142,13 @@ export const authOptions: NextAuthOptions = {
         token.role = user.role;
 
         // Inclui tenantId no contexto
-        const tenantId = user.context?.tenantId || undefined;
-        token.context = { tenantId, storeId: undefined }; // storeId inicialmente undefined
+        const tenant = user.context?.tenant || undefined;
+        token.context = { tenant, company: { id: undefined } }; // companyId inicialmente undefined
 
-        // O storeId será preenchido após criação da loja
+        // O companyId será preenchido após criação da loja
       } else {
         // Requisições subsequentes: buscar dados se necessário
-        if (!token.role || !token.context?.tenantId) {
+        if (!token.role || !token.context?.tenant?.id) {
           const userFromDb = await db.user.findUnique({
             where: { id: token.id },
             include: {
@@ -145,24 +160,29 @@ export const authOptions: NextAuthOptions = {
           token.role = userFromDb?.accounts[0]?.type || 'CUSTOMER';
 
           const tenantId = userFromDb?.tenant?.id || undefined;
-          token.context = { tenantId, storeId: undefined };
+          const tenantStatus = userFromDb?.tenant?.status || undefined;
+          token.context = {
+            tenant: { id: tenantId, status: tenantStatus },
+            company: { id: undefined },
+          };
         }
 
-        // Para OWNER, verificar loja associada ao tenantId
+        // Para ADMIN, verificar loja associada ao tenantId
         if (
-          token.role === 'OWNER' &&
-          token.context.tenantId &&
-          !token.context.storeId
+          token.role === 'ADMIN' &&
+          token.context.tenant?.id &&
+          (!token.context.company || !token.context.company.id)
         ) {
-          const store = await db.store.findFirst({
-            where: { tenantId: token.context.tenantId },
+          const company = await db.company.findFirst({
+            where: { tenantId: token.context.tenant.id },
             select: { id: true },
           });
 
-          token.context.storeId = store?.id || undefined;
+          token.context.company = {
+            id: company?.id,
+          };
         }
       }
-
       return token;
     },
     session({ session, token }) {

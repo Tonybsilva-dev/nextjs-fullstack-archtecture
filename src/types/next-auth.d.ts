@@ -1,12 +1,31 @@
 import 'next-auth';
 import 'next-auth/jwt';
 
-import { AccountType } from '@prisma/client';
+import { AccountType, Status } from '@prisma/client';
 
 type Role = AccountType;
-type TenantContext = Role extends 'OWNER'
-  ? { tenantId: string; storeId?: string }
-  : { tenantId?: string; storeId?: string };
+type TenantStatus = Status;
+type TenantContext = Role extends 'ADMIN'
+  ? {
+      tenant: {
+        id: string;
+        name: string;
+        status: TenantStatus;
+      };
+      company: {
+        id?: string;
+      } | null;
+    }
+  : {
+      tenant?: {
+        id?: string;
+        name?: string;
+        status?: TenantStatus;
+      };
+      company: {
+        id?: string;
+      } | null;
+    };
 
 declare module 'next-auth' {
   interface User {

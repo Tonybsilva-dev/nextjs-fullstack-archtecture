@@ -19,14 +19,6 @@ export const TermsAndConditionsView = () => {
   const t = useTranslations('terms-and-conditions');
   const isMobile = useBreakpoint();
 
-  const COMP = isMobile ? (
-    <LanguageSwitcher compact />
-  ) : (
-    <div className="min-w-[140px]">
-      <LanguageSwitcher />
-    </div>
-  );
-
   return (
     <main
       className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 md:px-8 md:py-24"
@@ -34,18 +26,21 @@ export const TermsAndConditionsView = () => {
     >
       <div className="mb-6 flex w-full items-center justify-between">
         <BackButton />
-        {COMP}
+        <LanguageSwitcher compact={isMobile} />
       </div>
       <div className="space-y-8">
         <header>
           <Typography
             id="terms-heading"
             className="text-center sm:text-4xl md:text-5xl"
-            variant={'h2'}
+            variant={'h1'}
           >
             {t('title')}
           </Typography>
-          <Typography className="mt-2 text-center" variant={'caption'}>
+          <Typography
+            className="mt-2 text-center text-zinc-500"
+            variant={'caption'}
+          >
             {t('last-updated')}: {LAST_UPDATED_APPLICATION}
           </Typography>
         </header>

@@ -9,43 +9,62 @@ datasource db {
 
 enum AccountType {
   ADMIN
-  OWNER
+  TENANT
   CUSTOMER
 }
 
-model Tenant {
-  id        String   @id @default(uuid()) @map("id")
-  name      String   @map("name")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
 
-  users   User[]    @relation("tenant_users")
-  stores  Store[]   @relation("tenant_stores")
-  Account Account[]
+model Tenant {
+  id         String    @id @default(uuid()) @map("id")
+  name       String    @map("name")
+  uniqueName String    @map("unique_name")
+  secret     String    @map("secret")
+  status     Status    @default(PENDING) @map("status")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deletedAt  DateTime? @updatedAt @map("deleted_at")
+
+  users         User[]          @relation("tenant_users")
+  Account       Account[]
+  company       Company[]
+  ActivityLog   ActivityLog[]
+  TenantSetting TenantSetting[]
 
   @@map("tenants")
 }
 
-model Store {
-  id        String    @id @default(uuid()) @map("id")
-  name      String    @map("name")
-  tenantId  String    @map("tenant_id")
-  tenant    Tenant    @relation("tenant_stores", fields: [tenantId], references: [id])
+model Company {
+  id            String @id @default(uuid()) @map("id")
+  document      String @unique @map("document")
+  name          String @map("name")
+  logoUrl       String @map("logo_url")
+  status        Status @default(PENDING) @map("status")
+  tenantId      String
+  tenant        Tenant @relation(fields: [tenantId], references: [id])
+  productCount  Int    @map("product_count")
+  customerCount Int    @map("customer_count")
+  categoryCount Int    @map("category_count")
+
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
-  categories Category[] @relation("store_categories")
-  products   Product[]  @relation("store_products")
+  categories Category[] @relation("company_categories")
+  products   Product[]  @relation("company_products")
 
-  @@map("stores")
+  @@map("companies")
 }
 
 model Category {
   id        String    @id @default(uuid()) @map("id")
   name      String    @map("name")
-  storeId   String    @map("store_id")
-  store     Store     @relation("store_categories", fields: [storeId], references: [id])
+  companyId String    @map("company_id")
+  company   Company   @relation("company_categories", fields: [companyId], references: [id])
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
@@ -59,8 +78,8 @@ model Product {
   id        String    @id @default(uuid()) @map("id")
   name      String    @map("name")
   price     Float     @map("price")
-  storeId   String    @map("store_id")
-  store     Store     @relation("store_products", fields: [storeId], references: [id])
+  companyId String    @map("company_id")
+  company   Company   @relation("company_products", fields: [companyId], references: [id])
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
@@ -148,5 +167,28 @@ model VerificationToken {
   expires    DateTime @map("expires")
 
   @@unique([identifier, token])
-  @@map("verificationtokens")
+  @@map("verification_tokens")
+}
+
+model ActivityLog {
+  id          String   @id @default(uuid())
+  tenantId    String   @map("tenant_id")
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  action      String   @map("action") // e.g., "COMPANY_APPROVAL"
+  description String   @map("description")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([tenantId, createdAt])
+  @@map("activity_logs")
+}
+
+model TenantSetting {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  key       String   @map("key") // e.g., "auto_approve_companys"
+  value     String   @map("value") // e.g., "true"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("tenant_settings")
 }

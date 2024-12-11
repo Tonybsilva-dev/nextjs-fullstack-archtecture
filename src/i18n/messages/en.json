@@ -15,32 +15,99 @@
     "description": "Made for all store sizes, {NAME_APPLICATION} is free and helps you take control of everything without losing focus on what matters most: selling.",
     "email-placeholder": "Enter your best email here",
     "cta-button": "USE FOR FREE NOW",
-    "features-section": {
-      "title": "Key Features",
-      "features": {
-        "client-management": {
-          "title": "Efficient Client Management",
-          "description": "Easily organize and manage client accounts with advanced categorization tools."
-        },
-        "data-security": {
-          "title": "Secure Data Storage",
-          "description": "Protect sensitive client information with top-tier security and encryption."
-        },
-        "analytics": {
-          "title": "Real-Time Analytics",
-          "description": "Gain actionable insights with real-time analytics on client activity and data."
+    "cta-section": {
+      "title": "Find & Manage Restaurants",
+      "subtitle": "With Ease",
+      "description": "Use geolocation to discover the best restaurants nearby, manage menus efficiently, and track customer orders seamlessly.",
+      "services": {
+        "find-restaurants": "Find Restaurants",
+        "track-orders": "Track Orders",
+        "manage-menus": "Manage Menus"
+      },
+      "product": {
+        "title": "Exclusive Dish",
+        "description": "Savor the best dishes, freshly prepared by top chefs.",
+        "button": "Explore Now"
+      },
+      "review": {
+        "rating": "4.7/5",
+        "quote": "This platform revolutionized the way we manage our restaurant. It saves time and increases efficiency!",
+        "reviewer": {
+          "name": "James Doe",
+          "location": "San Francisco"
         }
       }
     },
-    "contact-title": "Ready to Start?",
-    "contact-description": "Get in touch with us for a free demo or start using our platform today.",
-    "contact-demo-button": "Request Demo",
-    "contact-contact-button": "Contact Us",
+    "highlights-section": {
+      "title": "Highlights of {appName}",
+      "description": "A Complete Restaurant Manager App React Application",
+      "highlights": [
+        {
+          "title": "Optimize Your Restaurant's Efficiency",
+          "description": "Streamline daily operations, reduce manual tasks, and ensure smooth management with our app. Empower your staff to focus on delivering the best dining experience.",
+          "alt": "Illustration of restaurant efficiency"
+        },
+        {
+          "title": "Enhance Customer Engagement",
+          "description": "Use geolocation to attract nearby customers, provide personalized offers, and create an unforgettable dining experience tailored to your clientele's preferences.",
+          "alt": "Illustration of customer engagement"
+        },
+        {
+          "title": "Real-Time Order Tracking and Insights",
+          "description": "Monitor orders in real time and access detailed analytics to make data-driven decisions. Understand trends, peak hours, and customer preferences effortlessly.",
+          "alt": "Illustration of real-time tracking"
+        }
+      ]
+    },
+    "features-section": {
+      "title": "But wait, there is more",
+      "description": "Describe the full extent of your product",
+      "features": [
+        {
+          "title": "Table Reservation Management",
+          "description": "Easily manage reservations and walk-ins with a dynamic table booking system. Ensure seamless customer experiences during peak hours.",
+          "alt": "Illustration of table reservation management"
+        },
+        {
+          "title": "Menu Customization",
+          "description": "Quickly update and customize your restaurant's menu. Highlight daily specials and manage pricing in real time.",
+          "alt": "Illustration of menu customization"
+        },
+        {
+          "title": "Inventory Tracking",
+          "description": "Keep track of stock levels and receive alerts for low inventory. Avoid waste and maintain a steady supply chain.",
+          "alt": "Illustration of inventory tracking"
+        },
+        {
+          "title": "Order Tracking System",
+          "description": "Monitor all customer orders from the kitchen to the table. Minimize errors and maximize efficiency with real-time updates.",
+          "alt": "Illustration of order tracking system"
+        },
+        {
+          "title": "Customer Insights",
+          "description": "Analyze customer preferences and dining habits with built-in analytics. Personalize the experience and boost customer loyalty.",
+          "alt": "Illustration of customer insights"
+        },
+        {
+          "title": "Multi-Location Support",
+          "description": "Manage multiple restaurant locations from a single platform. Standardize operations and ensure consistent quality across all branches.",
+          "alt": "Illustration of multi-location support"
+        }
+      ]
+    },
+    "contact-me-section": {
+      "logo": {
+        "alt": "Asynnc logo"
+      },
+      "description": "This project is part of my web development studies. If you're interested in discussing it or collaborating, feel free to reach out!",
+      "button": {
+        "text": "Contact me"
+      }
+    },
     "footer": {
       "footer-copy": "© 2024 {NAME_APPLICATION}. All rights reserved.",
       "terms-and-conditions": "Terms and conditions of service"
-    },
-    "image-alt": "Smiling salesperson in a clothing store"
+    }
   },
   "terms-and-conditions": {
     "title": "Terms and conditions",
@@ -85,6 +152,83 @@
       "password": "Password must be at least 6 characters"
     }
   },
+  "request-demo": {
+    "page": {
+      "title": "Request demo",
+      "description": "Request a demo now!"
+    },
+    "form": {
+      "labels": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "message": "Message (optional)",
+        "sign-in": "Sign in"
+      },
+      "placeholders": {
+        "name": "Enter your name",
+        "email": "Enter your email",
+        "company": "Enter your company name",
+        "message": "Enter your message"
+      },
+      "buttons": {
+        "submit": "Request Demo",
+        "submitting": "Submitting..."
+      },
+      "status": {
+        "success": {
+          "message": "The form was submitted successfully."
+        },
+        "error": {
+          "message": "An error occurred while submitting the form."
+        }
+      }
+    },
+    "validations": {
+      "name": "The Name field is required.",
+      "email": "Please enter a valid email address.",
+      "company": "The Company field is required.",
+      "message": "The message must be no longer than 500 characters."
+    },
+    "sr-only": {
+      "announcements": {
+        "form-submitting": "The form is being submitted...",
+        "form-success": "Form submitted successfully!",
+        "form-error": "Error submitting the form. Please try again."
+      },
+      "aria-label": {
+        "name": "Input field for Name",
+        "email": "Input field for Email",
+        "company": "Input field for Company",
+        "message": "Text area for Message",
+        "submit": "Button to submit the demo request"
+      }
+    }
+  },
+  "tenant-pending": {
+    "page": {
+      "title": "Pending Approval",
+      "description": "Your registration is awaiting administrator approval."
+    },
+    "content": {
+      "icon": {
+        "alt": "Clock icon indicating pending status"
+      },
+      "message": {
+        "primary": "Thank you for signing up! Our team is reviewing your information and will contact you shortly."
+      },
+      "buttons": {
+        "sign-out": "Sign Out"
+      }
+    },
+    "accessibility": {
+      "card": {
+        "title": "Registration approval status",
+        "description": "Information about the current status of your registration."
+      },
+      "icon": "Pending status icon"
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Languages",
@@ -104,10 +248,58 @@
       }
     },
     "header-home": {
-      "links": {
-        "features": "Features",
-        "benefits": "Benefits",
-        "contact": "Contact"
+      "sections": {
+        "discover-restaurants": {
+          "label": "Discover Restaurants",
+          "items": {
+            "top-rated": {
+              "title": "Find Top-Rated Restaurants",
+              "description": "Explore the best-rated restaurants near you."
+            },
+            "nearby-map": {
+              "title": "Nearby Restaurants Map",
+              "description": "Open an interactive map to locate restaurants close to your location."
+            },
+            "search-cuisine": {
+              "title": "Search by Cuisine",
+              "description": "Search for restaurants by cuisine, dietary preferences, or keywords."
+            }
+          }
+        },
+        "manage-experience": {
+          "label": "Manage Your Experience",
+          "items": {
+            "reserve-table": {
+              "title": "Reserve a Table",
+              "description": "Easily book a table at your favorite restaurants."
+            },
+            "track-orders": {
+              "title": "Track Your Orders",
+              "description": "Keep track of your current and past orders effortlessly."
+            },
+            "save-favorites": {
+              "title": "Save Favorites",
+              "description": "Create a list of your favorite dining spots."
+            }
+          }
+        },
+        "help-resources": {
+          "label": "Help & Resources",
+          "items": {
+            "faq": {
+              "title": "FAQs",
+              "description": "Get answers to frequently asked questions about the app."
+            },
+            "developer": {
+              "title": "Developer Area",
+              "description": "Learn how to navigate and use the application effectively."
+            },
+            "contact-support": {
+              "title": "Contact Support",
+              "description": "Reach out to us for help or suggestions."
+            }
+          }
+        }
       },
       "sheet": {
         "title": "MENU",

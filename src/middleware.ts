@@ -10,31 +10,61 @@ const intlMiddleware = createMiddleware({
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const locale = req.nextUrl.locale || 'pt';
 
   // Token do next-auth (verifica autenticação)
   const token = await getToken({ req });
   const isLoggedIn = !!token;
-  const role = token?.role || 'CUSTOMER';
-  const storeId = token?.context?.storeId;
+  const role = token?.role;
+  const tenantStatus = token?.context?.tenant?.status;
+  const companyId = token?.context?.company?.id;
 
-  // Caso seja OWNER e não tenha uma loja, redirecionar para a página de Setup
-  if (role === 'OWNER' && !storeId && !pathname.startsWith('/setup')) {
-    return NextResponse.redirect(new URL('/setup', req.url));
+  if (isLoggedIn) {
+    if (role === 'ADMIN') {
+      if (tenantStatus === 'PENDING') {
+        // Redireciona caso o caminho atual não seja o pending status
+        const pendingPath = `/${locale}/admin/store/status/pending`;
+        if (!pathname.startsWith(pendingPath)) {
+          return NextResponse.redirect(
+            new URL(pendingPath, req.nextUrl.origin)
+          );
+        }
+      } else if (tenantStatus === 'APPROVED') {
+        if (!companyId) {
+          const setupPath = `/${locale}/setup`;
+          if (!pathname.startsWith(setupPath)) {
+            return NextResponse.redirect(
+              new URL(setupPath, req.nextUrl.origin)
+            );
+          }
+        } else {
+          // Se já existe companyId, garante que o admin vá pro dashboard
+          const adminDashboardPath = `/${locale}/admin/dashboard`;
+          if (!pathname.startsWith(adminDashboardPath)) {
+            return NextResponse.redirect(
+              new URL(adminDashboardPath, req.nextUrl.origin)
+            );
+          }
+        }
+      }
+    } else if (role === 'CUSTOMER') {
+      const customerDashboardPath = `/${locale}/customer/dashboard`;
+      if (!pathname.startsWith(customerDashboardPath)) {
+        return NextResponse.redirect(
+          new URL(customerDashboardPath, req.nextUrl.origin)
+        );
+      }
+    } else {
+      // Caso logado mas sem role definida
+      return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl.origin));
+    }
+  } else {
+    // Não logado
+    return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl.origin));
   }
 
-  // Redirecionamento para OWNER logado
-  if (pathname === '/' && isLoggedIn && role === 'OWNER') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
-
-  if (pathname.startsWith('/dashboard') && isLoggedIn && role !== 'OWNER') {
-    return NextResponse.redirect(new URL('/catalog', req.url));
-  }
-
-  if (pathname.startsWith('/dashboard') && !isLoggedIn) {
-    return NextResponse.redirect(new URL('/', req.url));
-  }
-
+  // Se nenhuma regra de redirecionamento acima foi acionada,
+  // tenta a lógica do middleware de internacionalização
   const intlResponse = intlMiddleware(req);
   if (intlResponse) {
     return intlResponse;
@@ -51,11 +81,7 @@ export const config = {
     '/dashboard/:path*',
     '/catalog/:path*',
     '/setup/:path*',
+    '/admin/store/status/:path*',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };
-
-// export const config = {
-//   // Match only internationalized pathnames
-//   matcher: ['/', '/(pt|en|es)/:path*'],
-// };
