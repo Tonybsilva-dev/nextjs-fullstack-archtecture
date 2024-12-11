@@ -15,32 +15,99 @@
     "description": "Feito para todos os tamanhos de loja, o {NAME_APPLICATION} é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
     "email-placeholder": "Digite aqui seu melhor e-mail",
     "cta-button": "USE DE GRAÇA AGORA",
-    "features-section": {
-      "title": "Principais Funcionalidades",
-      "features": {
-        "client-management": {
-          "title": "Gerenciamento Eficiente de Clientes",
-          "description": "Organize e gerencie contas de clientes facilmente com ferramentas avançadas de categorização."
-        },
-        "data-security": {
-          "title": "Armazenamento Seguro de Dados",
-          "description": "Proteja informações sensíveis de clientes com segurança de ponta e criptografia."
-        },
-        "analytics": {
-          "title": "Análises em Tempo Real",
-          "description": "Obtenha insights acionáveis com análises em tempo real sobre atividades e dados dos clientes."
+    "cta-section": {
+      "title": "Encontre e Gerencie Restaurantes",
+      "subtitle": "Com Facilidade",
+      "description": "Use a geolocalização para descobrir os melhores restaurantes próximos, gerencie cardápios de forma eficiente e acompanhe os pedidos dos clientes com facilidade.",
+      "services": {
+        "find-restaurants": "Encontrar Restaurantes",
+        "track-orders": "Acompanhar Pedidos",
+        "manage-menus": "Gerenciar Cardápios"
+      },
+      "product": {
+        "title": "Prato Exclusivo",
+        "description": "Saboreie os melhores pratos, preparados na hora pelos melhores chefs.",
+        "button": "Explorar Agora"
+      },
+      "review": {
+        "rating": "4.7/5",
+        "quote": "Esta plataforma revolucionou a forma como gerenciamos nosso restaurante. Economiza tempo e aumenta a eficiência!",
+        "reviewer": {
+          "name": "James Doe",
+          "location": "São Francisco"
         }
       }
     },
-    "contact-title": "Pronto para começar?",
-    "contact-description": "Entre em contato conosco para uma demonstração gratuita ou para começar a usar nossa plataforma hoje mesmo.",
-    "contact-demo-button": "Solicitar Demonstração",
-    "contact-contact-button": "Fale Conosco",
+    "highlights-section": {
+      "title": "Destaques do {appName}",
+      "description": "Um Aplicativo Completo para Gerenciamento de Restaurantes em React",
+      "highlights": [
+        {
+          "title": "Otimize a Eficiência do Seu Restaurante",
+          "description": "Simplifique as operações diárias, reduza tarefas manuais e garanta um gerenciamento tranquilo com nosso aplicativo. Permita que sua equipe foque na melhor experiência para os clientes.",
+          "alt": "Ilustração da eficiência no restaurante"
+        },
+        {
+          "title": "Melhore o Engajamento dos Clientes",
+          "description": "Use geolocalização para atrair clientes próximos, oferecer promoções personalizadas e criar uma experiência inesquecível para sua clientela.",
+          "alt": "Ilustração do engajamento com clientes"
+        },
+        {
+          "title": "Rastreamento de Pedidos em Tempo Real e Insights",
+          "description": "Monitore pedidos em tempo real e acesse análises detalhadas para tomar decisões baseadas em dados. Entenda tendências, horários de pico e preferências dos clientes com facilidade.",
+          "alt": "Ilustração do rastreamento em tempo real"
+        }
+      ]
+    },
+    "features-section": {
+      "title": "Espere, tem mais",
+      "description": "Descreva todo o alcance do seu produto",
+      "features": [
+        {
+          "title": "Gerenciamento de Reservas de Mesa",
+          "description": "Gerencie facilmente reservas e clientes sem reserva com um sistema dinâmico. Garanta uma experiência tranquila para os clientes durante horários de pico.",
+          "alt": "Ilustração do gerenciamento de reservas de mesa"
+        },
+        {
+          "title": "Personalização de Cardápios",
+          "description": "Atualize e personalize rapidamente o cardápio do seu restaurante. Destaque pratos do dia e gerencie preços em tempo real.",
+          "alt": "Ilustração da personalização de cardápios"
+        },
+        {
+          "title": "Controle de Estoque",
+          "description": "Acompanhe os níveis de estoque e receba alertas de baixa. Evite desperdícios e mantenha uma cadeia de suprimentos consistente.",
+          "alt": "Ilustração do controle de estoque"
+        },
+        {
+          "title": "Sistema de Rastreamento de Pedidos",
+          "description": "Monitore todos os pedidos de clientes, da cozinha à mesa. Minimize erros e maximize a eficiência com atualizações em tempo real.",
+          "alt": "Ilustração do sistema de rastreamento de pedidos"
+        },
+        {
+          "title": "Insights de Clientes",
+          "description": "Analise as preferências dos clientes com análises integradas. Personalize a experiência e aumente a fidelidade.",
+          "alt": "Ilustração dos insights de clientes"
+        },
+        {
+          "title": "Suporte para Múltiplas Localizações",
+          "description": "Gerencie vários restaurantes em uma única plataforma. Padronize operações e garanta qualidade consistente em todas as filiais.",
+          "alt": "Ilustração do suporte para múltiplas localizações"
+        }
+      ]
+    },
+    "contact-me-section": {
+      "logo": {
+        "alt": "Logotipo Asynnc"
+      },
+      "description": "Este projeto faz parte dos meus estudos de desenvolvimento web. Se você estiver interessado em discutir ou colaborar, sinta-se à vontade para entrar em contato!",
+      "button": {
+        "text": "Entre em contato"
+      }
+    },
     "footer": {
       "footer-copy": "© 2024 {NAME_APPLICATION}. Todos os direitos reservados.",
       "terms-and-conditions": "Termos e condições de serviço"
-    },
-    "image-alt": "Vendedora sorrindo em uma loja de roupas"
+    }
   },
   "sign-in": {
     "title": "Entrar",
@@ -53,6 +120,59 @@
     "validation": {
       "email": "Insira um email válido",
       "password": "A senha deve ter no mínimo 6 caracteres"
+    }
+  },
+  "request-demo": {
+    "page": {
+      "title": "Solicitar demonstração",
+      "description": "Solicite uma demonstração agora mesmo!"
+    },
+    "form": {
+      "labels": {
+        "name": "Nome",
+        "email": "E-mail",
+        "company": "Empresa",
+        "message": "Mensagem (opcional)",
+        "sign-in": "Logar"
+      },
+      "placeholders": {
+        "name": "Digite seu nome",
+        "email": "Digite seu e-mail",
+        "company": "Digite o nome da sua empresa",
+        "message": "Digite sua mensagem"
+      },
+      "buttons": {
+        "submit": "Solicitar Demonstração",
+        "submitting": "Enviando..."
+      },
+      "status": {
+        "success": {
+          "message": "O formulário foi enviado com sucesso."
+        },
+        "error": {
+          "message": "Ocorreu um erro ao enviar o formulário."
+        }
+      }
+    },
+    "validations": {
+      "name": "O campo Nome é obrigatório.",
+      "email": "Digite um endereço de e-mail válido.",
+      "company": "O campo Empresa é obrigatório.",
+      "message": "A mensagem deve ter no máximo 500 caracteres."
+    },
+    "sr-only": {
+      "announcements": {
+        "form-submitting": "O formulário está sendo enviado...",
+        "form-success": "Formulário enviado com sucesso!",
+        "form-error": "Erro ao enviar o formulário. Por favor, tente novamente."
+      },
+      "aria-label": {
+        "name": "Campo de entrada para Nome",
+        "email": "Campo de entrada para E-mail",
+        "company": "Campo de entrada para Empresa",
+        "message": "Campo de texto para Mensagem",
+        "submit": "Botão para enviar a solicitação de demonstração"
+      }
     }
   },
   "terms-and-conditions": {
@@ -85,6 +205,30 @@
       }
     }
   },
+  "tenant-pending": {
+    "page": {
+      "title": "Aprovação Pendente",
+      "description": "Seu cadastro está aguardando aprovação do administrador."
+    },
+    "content": {
+      "icon": {
+        "alt": "Ícone de relógio indicando status pendente"
+      },
+      "message": {
+        "primary": "Obrigado por se cadastrar! Nosso time está revisando suas informações e entrará em contato em breve."
+      },
+      "buttons": {
+        "sign-out": "Sair"
+      }
+    },
+    "accessibility": {
+      "card": {
+        "title": "Status de aprovação do cadastro",
+        "description": "Informações sobre o status atual do seu cadastro."
+      },
+      "icon": "Ícone de status pendente"
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Idiomas",
@@ -104,10 +248,58 @@
       }
     },
     "header-home": {
-      "links": {
-        "features": "Recursos",
-        "benefits": "Benefícios",
-        "contact": "Contato"
+      "sections": {
+        "discover-restaurants": {
+          "label": "Descubra Restaurantes",
+          "items": {
+            "top-rated": {
+              "title": "Encontre Restaurantes Bem Avaliados",
+              "description": "Explore os restaurantes com as melhores avaliações perto de você."
+            },
+            "nearby-map": {
+              "title": "Mapa de Restaurantes Próximos",
+              "description": "Abra um mapa interativo para localizar restaurantes próximos de sua localização."
+            },
+            "search-cuisine": {
+              "title": "Buscar por Cozinha",
+              "description": "Pesquise restaurantes por tipo de cozinha, preferências alimentares ou palavras-chave."
+            }
+          }
+        },
+        "manage-experience": {
+          "label": "Gerencie sua Experiência",
+          "items": {
+            "reserve-table": {
+              "title": "Reservar uma Mesa",
+              "description": "Reserve uma mesa facilmente nos seus restaurantes favoritos."
+            },
+            "track-orders": {
+              "title": "Acompanhar Pedidos",
+              "description": "Acompanhe seus pedidos atuais e anteriores sem complicações."
+            },
+            "save-favorites": {
+              "title": "Salvar Favoritos",
+              "description": "Crie uma lista dos seus pontos de alimentação favoritos."
+            }
+          }
+        },
+        "help-resources": {
+          "label": "Ajuda e Recursos",
+          "items": {
+            "faq": {
+              "title": "Perguntas Frequentes",
+              "description": "Obtenha respostas para perguntas frequentes sobre o aplicativo."
+            },
+            "developer": {
+              "title": "Área do Desenvolvedor",
+              "description": "Aprenda a navegar e usar o aplicativo de forma eficaz."
+            },
+            "contact-support": {
+              "title": "Contato com Suporte",
+              "description": "Entre em contato conosco para ajuda ou sugestões."
+            }
+          }
+        }
       },
       "sheet": {
         "title": "MENU",

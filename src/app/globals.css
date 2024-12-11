@@ -68,3 +68,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .rounded-blob {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  }
+}

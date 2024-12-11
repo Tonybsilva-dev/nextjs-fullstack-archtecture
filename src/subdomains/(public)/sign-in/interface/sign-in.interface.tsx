@@ -1,3 +1,5 @@
+import HONRIZONTAL_LOGO from '@/assets/logo/horizontal-logo-white.png';
+import { FallbackImage } from '@/shared/modules/components/custom/fallback-image';
 import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Separator } from '@/shared/modules/components/ui/separator';
 import { PageProps } from '@/shared/modules/types/page-props';
@@ -15,7 +17,13 @@ export const SignInView: React.FC<PageProps> = ({ params, router }) => {
           <div className="mb-6">
             <BackButton />
           </div>
-          <h1 className="text-2xl font-bold text-zinc-950 dark:text-white">
+          <FallbackImage
+            src={HONRIZONTAL_LOGO}
+            width={400}
+            height={200}
+            alt="logo"
+          />
+          <h1 className="mt-6 text-2xl font-bold text-zinc-950 dark:text-white">
             {t('title')}
           </h1>
           <p className="mb-4 mt-2 text-sm text-zinc-950 dark:text-zinc-400">

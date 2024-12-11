@@ -38,8 +38,6 @@ const SignInForm: React.FC<PageProps> = ({ params, router }) => {
   });
 
   const onSubmit = async (values: SignInFormValues) => {
-    console.log('Form Submitted:', values);
-
     try {
       const res = await signIn('credentials', {
         email: values.email,
