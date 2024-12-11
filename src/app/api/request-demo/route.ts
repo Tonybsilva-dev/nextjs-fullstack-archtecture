@@ -7,7 +7,6 @@ import { createTenant } from '@/shared/actions/tenant/create-tenant';
 import { HASH_ROUNDS } from '@/shared/modules/constants/application.constants';
 import { AppError } from '@/shared/modules/utils/errors';
 import { FormatEmailProvider } from '@/shared/modules/utils/format-email-provider';
-import { generateRandomString } from '@/shared/modules/utils/generate-random-string';
 
 export async function POST(req: Request) {
   try {
@@ -25,10 +24,7 @@ export async function POST(req: Request) {
     const tenant = await createTenant(tenantName);
 
     // 2. Gerar senha aleatória e hash
-    const password = generateRandomString({
-      length: 6,
-      numeric: true,
-    });
+    const password = `${tenant.uniqueName}` + new Date().getFullYear();
 
     const hashedPassword = await hash(password, HASH_ROUNDS);
 

@@ -1,8 +1,10 @@
 'use server';
 
+import { hash } from 'bcryptjs';
+
+import { HASH_ROUNDS } from '@/shared/modules/constants/application.constants';
 import { db } from '@/shared/modules/infrastructure/database/prisma';
 import { AppError } from '@/shared/modules/utils/errors';
-import { generateRandomString } from '@/shared/modules/utils/generate-random-string';
 
 import { getUniqueTenant } from './get-tenant';
 
@@ -13,11 +15,7 @@ export const createTenant = async (tenantName: string) => {
     throw new AppError('Tenant already exists. (FSA-RJ6H9)', true);
   }
 
-  const secret = generateRandomString({
-    length: 32,
-    alphanumeric: true,
-    includeSpecial: true,
-  });
+  const secret = await hash(tenant.uniqueName, HASH_ROUNDS);
 
   return await db.tenant.create({
     data: {
