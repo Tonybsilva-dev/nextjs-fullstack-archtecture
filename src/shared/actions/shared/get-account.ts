@@ -9,3 +9,11 @@ export const getAccountByProviderId = async (email: string) => {
     },
   });
 };
+
+export const getAccountByTenantId = async (tenantId: string) => {
+  return await db.account.findFirst({
+    where: {
+      tenantId,
+    },
+  });
+};

@@ -90,6 +90,11 @@
         }
       ]
     },
+    "request-demo-section": {
+      "title": "Prueba Nuestra Demostración",
+      "subtitle": "Vea cómo nuestra solución puede ayudar a su empresa. Complete nuestro formulario de demostración ahora.",
+      "button": "Ir al Formulario de Demostración"
+    },
     "contact-me-section": {
       "logo": {
         "alt": "Logotipo de Asynnc"
@@ -354,6 +359,9 @@
           "submit": "Enviar comentario"
         }
       }
+    },
+    "count-tenant-approved": {
+      "title": "En demostración"
     }
   }
 }

@@ -90,6 +90,11 @@
         }
       ]
     },
+    "request-demo-section": {
+      "title": "Try Our Demo",
+      "subtitle": "See how our solution can help your business. Fill out our demo form now.",
+      "button": "Go to Demo Form"
+    },
     "contact-me-section": {
       "logo": {
         "alt": "Asynnc logo"
@@ -354,6 +359,9 @@
           "submit": "Submit feedback"
         }
       }
+    },
+    "count-tenant-approved": {
+      "title": "In demonstration"
     }
   }
 }
