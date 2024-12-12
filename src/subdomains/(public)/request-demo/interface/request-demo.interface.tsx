@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
+import LOGO_IMG from '@/assets/logo/horizontal-logo.png';
+import { FallbackImage } from '@/shared/modules/components/custom/fallback-image';
 import { LanguageSwitcher } from '@/shared/modules/components/custom/language-switcher';
 import { BackButton } from '@/shared/modules/components/ui/back-button';
 import { Typography } from '@/shared/modules/components/ui/typography';
@@ -11,6 +13,7 @@ import { PageProps } from '@/shared/modules/types/page-props';
 import { AppError } from '@/shared/modules/utils/errors';
 import { formatDate } from '@/shared/modules/utils/format-date';
 
+import { CountTenantApproved } from '../components/form/count-tenant-approved';
 import { DemoRequestForm } from '../components/form/request-demo-form';
 import { DemoRequestFormValues } from '../validations/request-demo.validations';
 
@@ -63,25 +66,38 @@ export const RequestDemoView = ({ params }: PageProps) => {
     >
       <div className="mb-6 flex w-full items-center justify-between">
         <BackButton />
-        <LanguageSwitcher compact={isMobile} />
+        <div className="w-[180px]">
+          <LanguageSwitcher compact={isMobile} />
+        </div>
       </div>
-      <div className="space-y-8">
-        <header>
-          <Typography
-            id="request-demo-heading"
-            className="text-center sm:text-4xl md:text-5xl"
-            variant={'h1'}
-          >
-            {t('page.title')}
-          </Typography>
-          <Typography
-            className="mt-2 text-center text-zinc-500"
-            variant={'caption'}
-          >
-            {t('page.description')}
-          </Typography>
-        </header>
-        <DemoRequestForm onSubmit={onSubmit} params={{ translations: t }} />
+      <header className="mx-auto flex w-full flex-col items-center">
+        <Typography
+          id="request-demo-heading"
+          className="text-left sm:text-4xl md:text-5xl"
+          variant={'h1'}
+        >
+          {t('page.title')}
+        </Typography>
+        <Typography
+          className="mt-2 text-left text-zinc-500"
+          variant={'caption'}
+        >
+          {t('page.description')}
+        </Typography>
+      </header>
+      <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+        {/* Conteúdo à esquerda */}
+        <div className="my-auto hidden h-full items-center justify-center space-y-6 border-r p-4 md:flex">
+          <div>
+            <FallbackImage src={LOGO_IMG} alt="" width={1000} height={1000} />
+            {/* Contador de Solicitações */}
+            <CountTenantApproved />
+          </div>
+        </div>
+        {/* Formulário à direita */}
+        <div className="block w-full">
+          <DemoRequestForm onSubmit={onSubmit} params={{ translations: t }} />
+        </div>
       </div>
     </main>
   );

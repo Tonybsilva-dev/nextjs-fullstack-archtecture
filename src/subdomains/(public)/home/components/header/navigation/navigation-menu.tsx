@@ -36,7 +36,7 @@ export const NavigationMenuHeader = ({ sections }: NavigationMenuProps) => {
     <NavigationMenu>
       <NavigationMenuList>
         {sections.map((section) => (
-          <>
+          <React.Fragment key={section.label}>
             <NavigationMenuItem key={section.label}>
               {section.items && section.items.length > 0 ? (
                 <>
@@ -81,7 +81,7 @@ export const NavigationMenuHeader = ({ sections }: NavigationMenuProps) => {
                 </CustomLink>
               )}
             </NavigationMenuItem>
-          </>
+          </React.Fragment>
         ))}
       </NavigationMenuList>
     </NavigationMenu>

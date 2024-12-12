@@ -10,11 +10,6 @@
     "logout-button": "Deslogar"
   },
   "home-page": {
-    "organize-grow": "Organize, venda, cresça!",
-    "manage-store": "Controle todas as partes da sua loja e aumente vendas com a facilidade que deseja",
-    "description": "Feito para todos os tamanhos de loja, o {NAME_APPLICATION} é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
-    "email-placeholder": "Digite aqui seu melhor e-mail",
-    "cta-button": "USE DE GRAÇA AGORA",
     "cta-section": {
       "title": "Encontre e Gerencie Restaurantes",
       "subtitle": "Com Facilidade",

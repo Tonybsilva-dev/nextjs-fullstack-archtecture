@@ -10,11 +10,6 @@
     "logout-button": "Log Out"
   },
   "home-page": {
-    "organize-grow": "Organize, sell, grow!",
-    "manage-store": "Manage every part of your store and increase sales with the ease you desire",
-    "description": "Made for all store sizes, {NAME_APPLICATION} is free and helps you take control of everything without losing focus on what matters most: selling.",
-    "email-placeholder": "Enter your best email here",
-    "cta-button": "USE FOR FREE NOW",
     "cta-section": {
       "title": "Find & Manage Restaurants",
       "subtitle": "With Ease",
