@@ -49,8 +49,8 @@ const SignInForm: React.FC<PageProps> = ({ params, router }) => {
         toast.error(res.error, {
           description: formatDate(new Date()),
         });
-      } else if (router) {
-        router.push('/dashboard');
+      } else if (router && res?.ok) {
+        router.push('/admin/dashboard');
       }
     } catch (error) {
       const appError = AppError.from(error);
