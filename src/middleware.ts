@@ -10,67 +10,83 @@ const intlMiddleware = createMiddleware({
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const locale = req.nextUrl.locale || 'pt';
 
   // Token do next-auth (verifica autenticação)
   const token = await getToken({ req });
   const isLoggedIn = !!token;
-  const role = token?.role;
-  const tenantStatus = token?.context?.tenant?.status;
-  const companyId = token?.context?.company?.id;
+  const role = token?.role || 'CUSTOMER';
+  const company = token?.context?.company;
+  const tenant = token?.context.tenant;
+  const locale = req.nextUrl.locale || 'pt';
 
-  if (isLoggedIn) {
-    if (role === 'ADMIN') {
-      if (tenantStatus === 'PENDING') {
-        // Redireciona caso o caminho atual não seja o pending status
-        const pendingPath = `/${locale}/admin/store/status/pending`;
-        if (!pathname.startsWith(pendingPath)) {
-          return NextResponse.redirect(
-            new URL(pendingPath, req.nextUrl.origin)
-          );
-        }
-      } else if (tenantStatus === 'APPROVED') {
-        if (!companyId) {
-          const setupPath = `/${locale}/setup`;
-          if (!pathname.startsWith(setupPath)) {
-            return NextResponse.redirect(
-              new URL(setupPath, req.nextUrl.origin)
-            );
-          }
-        } else {
-          // Se já existe companyId, garante que o admin vá pro dashboard
-          const adminDashboardPath = `/${locale}/admin/dashboard`;
-          if (!pathname.startsWith(adminDashboardPath)) {
-            return NextResponse.redirect(
-              new URL(adminDashboardPath, req.nextUrl.origin)
-            );
-          }
-        }
+  const protectedPaths = [
+    `/${locale}/admin`,
+    `/${locale}/customer`,
+    `/${locale}/manager`,
+  ];
+  const isProtectedPath = protectedPaths.some((protectedPath) =>
+    pathname.startsWith(protectedPath)
+  );
+
+  if (!isLoggedIn && isProtectedPath) {
+    return NextResponse.redirect(new URL(`/${locale}`, req.nextUrl.origin));
+  }
+
+  if (isLoggedIn && role === 'ADMIN') {
+    const pendingPath = `/${locale}/admin/store/status/pending`;
+    const rejectedPath = `/${locale}/admin/store/status/rejected`;
+    const setupPath = `/${locale}/setup`;
+    const dashboardPath = `/${locale}/admin/dashboard`;
+
+    console.log(`Role: ${role}`);
+    console.log(`Tenant Status: ${tenant?.status}`);
+    console.log(`Company ID: ${company?.id}`);
+    console.log(`Current Path: ${pathname}`);
+
+    // Admin tenant status checks
+    if (tenant?.status === 'PENDING' && pathname !== pendingPath) {
+      return NextResponse.redirect(new URL(pendingPath, req.nextUrl.origin));
+    }
+
+    if (tenant?.status === 'REJECTED' && pathname !== rejectedPath) {
+      return NextResponse.redirect(new URL(rejectedPath, req.nextUrl.origin));
+    }
+
+    if (
+      !company?.id &&
+      tenant?.status === 'APPROVED' &&
+      pathname !== setupPath
+    ) {
+      return NextResponse.redirect(new URL(setupPath, req.nextUrl.origin));
+    }
+
+    if (tenant?.status === 'APPROVED' && company?.id) {
+      // Permita acesso a todas as rotas em /admin/*
+      if (pathname.startsWith(`/${locale}/admin`)) {
+        return NextResponse.next();
       }
-    } else if (role === 'CUSTOMER') {
-      const customerDashboardPath = `/${locale}/customer/dashboard`;
-      if (!pathname.startsWith(customerDashboardPath)) {
+
+      // Redirecione para o dashboard caso esteja acessando fora de /admin/*
+      if (pathname !== dashboardPath) {
         return NextResponse.redirect(
-          new URL(customerDashboardPath, req.nextUrl.origin)
+          new URL(dashboardPath, req.nextUrl.origin)
         );
       }
-    } else {
-      // Caso logado mas sem role definida
-      return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl.origin));
     }
-  } else {
-    // Não logado
-    return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl.origin));
   }
-
-  // Se nenhuma regra de redirecionamento acima foi acionada,
-  // tenta a lógica do middleware de internacionalização
-  const intlResponse = intlMiddleware(req);
-  if (intlResponse) {
-    return intlResponse;
+  if (isLoggedIn && role === 'CUSTOMER') {
+    const dashboardPath = `/${locale}/customer/dashboard`;
+    // Permitir acesso a rotas de customer
+    if (pathname.startsWith(`/${locale}/customer`)) {
+      return NextResponse.next();
+    }
+    // Redirecionar para o dashboard caso esteja acessando fora de /customer/*
+    if (pathname !== dashboardPath) {
+      return NextResponse.redirect(new URL(dashboardPath, req.nextUrl.origin));
+    }
   }
-
-  return NextResponse.next();
+  // **4. Middleware para internacionalização**
+  return intlMiddleware(req) || NextResponse.next();
 }
 
 // Configuração do matcher
