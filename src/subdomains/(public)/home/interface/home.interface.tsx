@@ -10,6 +10,7 @@ import { ContactMeSection } from '../components/sections/contact-me-section';
 import { CTASection } from '../components/sections/cta-section';
 import { FeaturesSection } from '../components/sections/feature-section';
 import { HighlightsSection } from '../components/sections/highlights-section';
+import { DemoSection } from '../components/sections/request-demo-section';
 
 export const HomeView: React.FC<PageProps> = ({ params }) => {
   const { translations: t } = params;
@@ -34,6 +35,9 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
         </section>
         <section id="feature-section" className="flex w-full justify-center">
           <FeaturesSection params={{ translations: t }} />
+        </section>
+        <section id="contact-me" className="flex w-full justify-center">
+          <DemoSection params={{ translations: t }} />
         </section>
         <section id="contact-me" className="flex w-full justify-center">
           <ContactMeSection params={{ translations: t }} />

@@ -58,7 +58,7 @@ export const HeaderHome = ({ params, navigation }: HeaderHomeProps) => {
           <SignInButton />
         </div>
 
-        <div className="right-0 md:hidden">
+        <div className="right-0 mr-2 md:hidden">
           <HeaderHomeMobile
             params={{ translations: t }}
             navigation={navigation}

@@ -42,20 +42,21 @@ export const CTASection = ({ params }: PageProps) => {
 
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
           {/* Services Column */}
-          <div className="space-y-8 md:col-span-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:col-span-4 md:flex-col md:gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center text-center"
+                className="flex w-16 flex-col items-center text-center"
               >
-                <div className="mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
                   {service.icon}
                 </div>
-                <span className="font-medium">{service.name}</span>
+                <span className="hidden font-medium md:block">
+                  {service.name}
+                </span>
               </div>
             ))}
           </div>
-
           {/* Center Image */}
           <div className="relative md:col-span-4">
             <div className="relative">

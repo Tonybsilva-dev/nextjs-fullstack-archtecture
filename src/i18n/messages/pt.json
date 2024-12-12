@@ -10,11 +10,6 @@
     "logout-button": "Deslogar"
   },
   "home-page": {
-    "organize-grow": "Organize, venda, cresça!",
-    "manage-store": "Controle todas as partes da sua loja e aumente vendas com a facilidade que deseja",
-    "description": "Feito para todos os tamanhos de loja, o {NAME_APPLICATION} é de graça e ajuda você a ter o controle de tudo sem tirar o foco do que mais importa: vender.",
-    "email-placeholder": "Digite aqui seu melhor e-mail",
-    "cta-button": "USE DE GRAÇA AGORA",
     "cta-section": {
       "title": "Encontre e Gerencie Restaurantes",
       "subtitle": "Com Facilidade",
@@ -94,6 +89,11 @@
           "alt": "Ilustração do suporte para múltiplas localizações"
         }
       ]
+    },
+    "request-demo-section": {
+      "title": "Experimente nossa demonstração",
+      "subtitle": "Veja como nossa solução pode ajudar sua empresa. Preencha nosso formulário de demonstração agora.",
+      "button": "Ir para o formulário de demonstração"
     },
     "contact-me-section": {
       "logo": {
@@ -359,6 +359,9 @@
           "submit": "Enviar feedback"
         }
       }
+    },
+    "count-tenant-approved": {
+      "title": "Em demonstração"
     }
   }
 }
