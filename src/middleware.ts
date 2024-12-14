@@ -35,7 +35,7 @@ export default async function middleware(req: NextRequest) {
   if (isLoggedIn && role === 'ADMIN') {
     const pendingPath = `/${locale}/admin/store/status/pending`;
     const rejectedPath = `/${locale}/admin/store/status/rejected`;
-    const setupPath = `/${locale}/setup`;
+    const setupPath = `/${locale}/admin/store/setup`;
     const dashboardPath = `/${locale}/admin/dashboard`;
 
     console.log(`Role: ${role}`);

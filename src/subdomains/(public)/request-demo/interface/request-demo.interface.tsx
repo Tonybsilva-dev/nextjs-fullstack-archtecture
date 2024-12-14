@@ -66,7 +66,7 @@ export const RequestDemoView = ({ params }: PageProps) => {
     >
       <div className="mb-6 flex w-full items-center justify-between">
         <BackButton />
-        <div className="w-[180px]">
+        <div className={`${!isMobile ? 'w-[180px]' : ''}`}>
           <LanguageSwitcher compact={isMobile} />
         </div>
       </div>
