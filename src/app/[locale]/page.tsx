@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Página inicial',
+  title: 'Home page',
 };
 
 export { HomeContainer as default } from '@/subdomains/(public)/home/container/home.container';
