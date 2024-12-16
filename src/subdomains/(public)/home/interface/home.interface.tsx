@@ -42,28 +42,6 @@ export const HomeView: React.FC<PageProps> = ({ params }) => {
         <section id="contact-me" className="flex w-full justify-center">
           <ContactMeSection params={{ translations: t }} />
         </section>
-        {/*
-        <section id="contact" className="bg-gray-100 py-20">
-          <div className="container mx-auto px-4 text-center">
-            <Typography as="h2" variant="h2" className="mb-6 text-center">
-              {t('contact-title')}
-            </Typography>
-            <Typography
-              variant="body1"
-              className="mx-auto mb-8 max-w-2xl text-center text-gray-600"
-            >
-              {t('contact-description')}
-            </Typography>
-            <div className="flex justify-center gap-4">
-              <CustomLink href="/request-demo">
-                <Button>{t('contact-demo-button')}</Button>
-              </CustomLink>
-              <CustomLink href="#contact">
-                <Button variant="outline">{t('contact-contact-button')}</Button>
-              </CustomLink>
-            </div>
-          </div>
-        </section> */}
       </main>
       <footer className="border-t border-gray-200 py-8">
         <div className="container mx-auto flex flex-col items-center justify-between px-4 sm:flex-row">

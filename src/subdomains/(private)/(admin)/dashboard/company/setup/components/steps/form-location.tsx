@@ -17,8 +17,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/modules/components/ui/form';
+import { PageProps } from '@/shared/modules/types/page-props';
 
-// Ícone padrão do Leaflet ajuste caso necessário
 const DefaultIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7/dist/images/marker-icon.png',
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.7/dist/images/marker-icon-2x.png',
@@ -29,31 +29,8 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-function LocationSelector() {
-  const { setValue, watch } = useFormContext();
-  const latitude = watch('latitude');
-  const longitude = watch('longitude');
-
-  useMapEvents({
-    click(e) {
-      const { lat, lng } = e.latlng;
-      setValue('latitude', lat, { shouldValidate: true });
-      setValue('longitude', lng, { shouldValidate: true });
-    },
-  });
-
-  return (
-    <>
-      {latitude !== 0 && longitude !== 0 && (
-        <Marker position={[latitude, longitude]}>
-          <Popup>Your selected location</Popup>
-        </Marker>
-      )}
-    </>
-  );
-}
-
-export const FormLocation: React.FC = () => {
+export const FormLocation: React.FC<PageProps> = ({ params }) => {
+  const { translations: t } = params;
   const { control, watch } = useFormContext();
   const latitude = watch('latitude') || 0;
   const longitude = watch('longitude') || 0;
@@ -63,22 +40,42 @@ export const FormLocation: React.FC = () => {
       ? ([latitude, longitude] as [number, number])
       : [-15.7942, -47.8822];
 
+  function LocationSelector() {
+    const { setValue, watch } = useFormContext();
+    const latitude = watch('latitude');
+    const longitude = watch('longitude');
+
+    useMapEvents({
+      click(e) {
+        const { lat, lng } = e.latlng;
+        setValue('latitude', lat, { shouldValidate: true });
+        setValue('longitude', lng, { shouldValidate: true });
+      },
+    });
+
+    return (
+      <>
+        {latitude !== 0 && longitude !== 0 && (
+          <Marker position={[latitude, longitude]}>
+            <Popup>{t('form.labels.selectedLocation')}</Popup>
+          </Marker>
+        )}
+      </>
+    );
+  }
+
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-light">Step 3: Location Setup</h2>
-      <p className="mb-4 text-gray-600">
-        Click on the map to set your exact store location.
-      </p>
+      <h2 className="mb-6 text-2xl font-light">{t('steps.3.title')}</h2>
+      <p className="mb-4 text-gray-600">{t('steps.3.description')}</p>
       <div className="space-y-4">
-        {/* Campos latitude e longitude escondidos, mas validados */}
         <FormField
           control={control}
           name="latitude"
           render={({ field }) => (
             <FormItem className="hidden">
-              <FormLabel>Latitude</FormLabel>
+              <FormLabel>{t('form.labels.latitude')}</FormLabel>
               <FormControl>
-                {/* Campo oculto, apenas para manter validação e estado */}
                 <input type="hidden" {...field} />
               </FormControl>
               <FormMessage />
@@ -91,7 +88,7 @@ export const FormLocation: React.FC = () => {
           name="longitude"
           render={({ field }) => (
             <FormItem className="hidden">
-              <FormLabel>Longitude</FormLabel>
+              <FormLabel>{t('form.labels.longitude')}</FormLabel>
               <FormControl>
                 <input type="hidden" {...field} />
               </FormControl>
@@ -101,7 +98,6 @@ export const FormLocation: React.FC = () => {
         />
 
         <div className="h-96 w-full">
-          {/* Container do mapa */}
           <MapContainer
             center={[center[0], center[1]]}
             zoom={14}

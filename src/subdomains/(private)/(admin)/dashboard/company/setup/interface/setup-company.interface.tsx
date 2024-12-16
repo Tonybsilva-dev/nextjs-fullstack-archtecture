@@ -6,6 +6,7 @@ import { BanIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { EmptyState } from '@/shared/modules/components/custom/empty-state';
 import { Button } from '@/shared/modules/components/ui/button';
@@ -16,18 +17,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/modules/components/ui/dialog';
+import { PageProps } from '@/shared/modules/types/page-props';
+import { AppError } from '@/shared/modules/utils/errors';
+import { formatDate } from '@/shared/modules/utils/format-date';
 
 import { Stepper } from '../components/stepper';
 import { FormBasicInfo } from '../components/steps/form-basic-info';
 import { FormContactInfo } from '../components/steps/form-contact-info';
 import { FormLocation } from '../components/steps/form-location';
 import { FormReview } from '../components/steps/form-review';
-import { storeZodSchema } from '../validations/setup-store.validations';
+import { storeZodSchema } from '../validations/setup-company.validations';
 
 type StoreData = {
   name: string;
+  document: string;
   description: string;
-  category: string;
+  categories: string[];
   address: string;
   phone: string;
   email: string;
@@ -37,8 +42,9 @@ type StoreData = {
 
 const defaultValues: StoreData = {
   name: '',
+  document: '',
   description: '',
-  category: '',
+  categories: [],
   address: '',
   phone: '',
   email: '',
@@ -46,12 +52,13 @@ const defaultValues: StoreData = {
   longitude: 0,
 };
 
-export default function SetupStoreView() {
+export const SetupCompanyView = ({ params, router }: PageProps) => {
+  const { translations: t } = params;
+
   const [currentStep, setCurrentStep] = useState(1);
   const [askGeoPermission, setAskGeoPermission] = useState(false);
-  const [geoChecked, setGeoChecked] = useState(false); // Para saber se já tentamos pedir a localização
+  const [geoChecked, setGeoChecked] = useState(false);
 
-  // Inicializando o react-hook-form com zodResolver
   const methods = useForm<StoreData>({
     resolver: zodResolver(storeZodSchema),
     defaultValues,
@@ -61,16 +68,21 @@ export default function SetupStoreView() {
   const { setValue } = methods;
 
   const steps = [
-    { number: 1, title: 'Basic Info' },
-    { number: 2, title: 'Contact Info' },
-    { number: 3, title: 'Location Setup' },
-    { number: 4, title: 'Payment Setup' },
-    { number: 5, title: 'Review & Confirm' },
+    { number: 1, title: t('steps.1.title') },
+    { number: 2, title: t('steps.2.title') },
+    { number: 3, title: t('steps.3.title') },
+    { number: 4, title: t('steps.4.title') },
+    { number: 5, title: t('steps.5.title') },
   ];
 
   const nextStep = async () => {
     if (currentStep === 1) {
-      const valid = await methods.trigger(['name', 'description', 'category']);
+      const valid = await methods.trigger([
+        'name',
+        'document',
+        'description',
+        'categories',
+      ]);
       if (!valid) return;
     } else if (currentStep === 2) {
       const valid = await methods.trigger(['address', 'phone', 'email']);
@@ -88,20 +100,21 @@ export default function SetupStoreView() {
   const renderForm = () => {
     switch (currentStep) {
       case 1:
-        return <FormBasicInfo />;
+        return <FormBasicInfo params={{ translations: t }} />;
       case 2:
-        return <FormContactInfo />;
+        return <FormContactInfo params={{ translations: t }} />;
       case 3:
         return (
           <>
             <Dialog open={askGeoPermission} onOpenChange={setAskGeoPermission}>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Allow Geolocation?</DialogTitle>
+                  <DialogTitle>
+                    {t('form.dialog.allow-geolocation')}
+                  </DialogTitle>
                 </DialogHeader>
                 <p className="text-gray-600">
-                  We would like to access your current location to start the map
-                  view as close as possible to your store.
+                  {t('form.dialog.geolocation-description')}
                 </p>
                 <DialogFooter>
                   <Button
@@ -112,7 +125,7 @@ export default function SetupStoreView() {
                       setGeoChecked(true);
                     }}
                   >
-                    No, thanks
+                    {t('form.buttons.denyLocation')}
                   </Button>
                   <Button
                     onClick={() => {
@@ -134,18 +147,18 @@ export default function SetupStoreView() {
                       );
                     }}
                   >
-                    Allow
+                    {t('form.buttons.allowLocation')}
                   </Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
-            {geoChecked && <FormLocation />}
+            {geoChecked && <FormLocation params={{ translations: t }} />}
           </>
         );
       case 5:
-        return <FormReview />;
+        return <FormReview params={{ translations: t }} />;
       default:
-        return <EmptyState text="Setup not implemented" icon={BanIcon} />;
+        return <EmptyState text={t('form.empty-state')} icon={BanIcon} />;
     }
   };
 
@@ -155,16 +168,49 @@ export default function SetupStoreView() {
     }
   }, [currentStep, geoChecked]);
 
+  const onSubmit = async (data: StoreData) => {
+    try {
+      const response = await fetch('/api/company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        toast.success(t('form.status.success.message'), {
+          description: formatDate(new Date()),
+        });
+
+        signOut();
+
+        toast.success(t('form.signOutMessage'));
+      } else {
+        toast.error(responseData.error, {
+          description: formatDate(new Date()),
+        });
+      }
+      methods.reset();
+    } catch (error) {
+      const appError = AppError.from(error);
+      appError.logError();
+
+      toast.error(appError.message, {
+        description: formatDate(new Date()),
+      });
+    }
+  };
+
   return (
     <FormProvider {...methods}>
       <div className="flex min-h-screen flex-col items-center justify-center bg-white p-4">
-        <h1 className="mb-2 text-3xl font-light">Before continuing...</h1>
-        <p className="mb-8 text-gray-600">
-          Complete the steps below to start your journey with us!
-        </p>
+        <h1 className="mb-2 text-3xl font-light">{t('page.title')}</h1>
+        <p className="mb-8 text-gray-600">{t('page.description')}</p>
         <div className="w-full max-w-3xl">
           <Stepper steps={steps} currentStep={currentStep} />
-
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -179,8 +225,8 @@ export default function SetupStoreView() {
 
           <div className="mt-12 flex justify-between">
             {currentStep === 1 ? (
-              <Button variant="outline" onClick={() => signOut()}>
-                Cancel
+              <Button variant="outline" onClick={router?.back}>
+                {t('form.buttons.cancel')}
               </Button>
             ) : (
               <Button
@@ -189,16 +235,25 @@ export default function SetupStoreView() {
                 className="flex items-center space-x-2"
               >
                 <ChevronLeftIcon className="h-4 w-4" />
-                <span>Back</span>
+                <span>{t('form.buttons.back')}</span>
               </Button>
             )}
 
             <Button
-              onClick={nextStep}
-              disabled={currentStep === steps.length}
+              onClick={() => {
+                if (currentStep < steps.length) {
+                  nextStep();
+                } else {
+                  methods.handleSubmit(onSubmit)();
+                }
+              }}
               className="flex items-center space-x-2"
             >
-              <span>{currentStep < steps.length ? 'Next Step' : 'Finish'}</span>
+              <span>
+                {currentStep < steps.length
+                  ? t('form.buttons.nextStep')
+                  : t('form.buttons.submit')}
+              </span>
               <ChevronRightIcon className="h-4 w-4" />
             </Button>
           </div>
@@ -206,4 +261,4 @@ export default function SetupStoreView() {
       </div>
     </FormProvider>
   );
-}
+};

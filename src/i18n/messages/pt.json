@@ -229,6 +229,91 @@
       "icon": "Ícone de status pendente"
     }
   },
+  "setup-company": {
+    "page": {
+      "title": "Configuração da Empresa",
+      "description": "Complete os seguintes passos para estabelecer o perfil da sua empresa em nosso sistema."
+    },
+    "form": {
+      "empty-state": "Não implementado",
+      "dialog": {
+        "allow-geolocation": "Permitir Geolocalização?",
+        "geolocation-description": "Gostaríamos de acessar sua localização atual para iniciar a visualização do mapa o mais próximo possível da sua loja."
+      },
+      "labels": {
+        "name": "Nome",
+        "document": "Documento",
+        "description": "Descrição",
+        "categories": "Categorias",
+        "address": "Endereço",
+        "phone": "Telefone",
+        "email": "E-mail",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "submit": "Enviar",
+        "selected-location": "Localização selecionada"
+      },
+      "placeholders": {
+        "name": "Digite seu nome",
+        "document": "Digite o número do seu documento",
+        "description": "Descreva sua empresa",
+        "address": "Digite seu endereço",
+        "phone": "Digite seu telefone",
+        "email": "Digite seu e-mail",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+      },
+      "buttons": {
+        "submit": "Enviar",
+        "nextStep": "Próximo Passo",
+        "previousStep": "Passo Anterior",
+        "cancel": "Cancelar",
+        "signOut": "Sair",
+        "allowLocation": "Permitir",
+        "denyLocation": "Negar",
+        "back": "Voltar"
+      },
+      "status": {
+        "payment-details": "Preferências de pagamento",
+        "success": {
+          "message": "O formulário foi enviado com sucesso."
+        },
+        "error": {
+          "message": "Ocorreu um erro ao enviar o formulário."
+        }
+      },
+      "validations": {
+        "name": "O campo Nome é obrigatório.",
+        "document": "O CNPJ deve estar no formato XX.XXX.XXX/XXXX-XX.",
+        "description": "A descrição pode ter no máximo 150 caracteres.",
+        "categories": "Selecione pelo menos uma categoria. Você pode selecionar no máximo 3 categorias.",
+        "address": "O endereço é obrigatório.",
+        "phone": "O telefone deve ser um número válido (por exemplo, +5511999999999).",
+        "email": "O e-mail deve ser um endereço de e-mail válido.",
+        "latitude": "Selecione um local no mapa.",
+        "longitude": "Selecione um local no mapa."
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Informações Básicas"
+      },
+      "2": {
+        "title": "Informações de Contato"
+      },
+      "3": {
+        "title": "Configuração de Localização",
+        "description": "Clique no mapa para ajustar sua localização"
+      },
+      "4": {
+        "title": "Configuração de Pagamento"
+      },
+      "5": {
+        "title": "Revisar e Confirmar",
+        "description": "Revise aqui suas configurações"
+      }
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Idiomas",

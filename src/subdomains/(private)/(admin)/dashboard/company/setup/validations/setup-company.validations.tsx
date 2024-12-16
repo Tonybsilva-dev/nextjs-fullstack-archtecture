@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { regex } from '@/shared/modules/utils/regex';
+
 /* Zod Schemas */
 
 export const storeZodSchema = z.object({
@@ -10,14 +12,19 @@ export const storeZodSchema = z.object({
     .string()
     .max(150, { message: 'Description can have a maximum of 150 characters.' })
     .optional(),
-  category: z.string().nonempty({ message: 'Please select a category.' }),
-
-  address: z.string().nonempty({ message: 'Address is required.' }),
-  phone: z
+  categories: z
+    .array(z.string().min(1))
+    .min(1, { message: 'Please select at least one category.' })
+    .max(3, { message: 'You can select a maximum of 3 categories.' }),
+  document: z
     .string()
-    .regex(/^\+?\d+$/, {
-      message: 'Phone must be a valid number (e.g., +5511999999999).',
+    .regex(regex.cnpj, {
+      message: 'CNPJ must be in the format XX.XXX.XXX/XXXX-XX.',
     }),
+  address: z.string().nonempty({ message: 'Address is required.' }),
+  phone: z.string().regex(/^\+?\d+$/, {
+    message: 'Phone must be a valid number (e.g., +5511999999999).',
+  }),
   email: z.string().email({ message: 'Email must be a valid email address.' }),
 
   latitude: z

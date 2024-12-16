@@ -229,6 +229,90 @@
       "icon": "Ícono de estado pendiente"
     }
   },
+  "setup-company": {
+    "page": {
+      "title": "Configuración de la Empresa",
+      "description": "Complete los siguientes pasos para establecer el perfil de su empresa en nuestro sistema."
+    },
+    "form": {
+      "empty-state": "No implementado.",
+      "dialog": {
+        "allow-geolocation": "¿Permitir Geolocalización?",
+        "geolocation-description": "Nos gustaría acceder a tu ubicación actual para iniciar la vista del mapa lo más cerca posible de tu tienda."
+      },
+      "labels": {
+        "name": "Nombre",
+        "document": "Documento",
+        "description": "Descripción",
+        "categories": "Categorías",
+        "address": "Dirección",
+        "phone": "Teléfono",
+        "email": "Correo electrónico",
+        "latitude": "Latitud",
+        "longitude": "Longitud",
+        "selected-location": "Ubicación seleccionada"
+      },
+      "placeholders": {
+        "name": "Ingrese su nombre",
+        "document": "Ingrese su número de documento",
+        "description": "Describa su empresa",
+        "address": "Ingrese su dirección",
+        "phone": "Ingrese su número de teléfono",
+        "email": "Ingrese su correo electrónico",
+        "latitude": "Latitud",
+        "longitude": "Longitud"
+      },
+      "buttons": {
+        "submit": "Enviar",
+        "nextStep": "Siguiente Paso",
+        "previousStep": "Paso Anterior",
+        "signOut": "Cerrar Sesión",
+        "allowLocation": "Permitir",
+        "denyLocation": "Denegar",
+        "cancel": "Cancelar",
+        "back": "Regresar"
+      },
+      "status": {
+        "payment-details": "Preferências de pago",
+        "success": {
+          "message": "El formulario se ha enviado correctamente."
+        },
+        "error": {
+          "message": "Se produjo un error al enviar el formulario."
+        }
+      },
+      "validations": {
+        "name": "El campo Nombre es obligatorio.",
+        "document": "El documento debe estar en el formato XX.XXX.XXX/XXXX-XX.",
+        "description": "La descripción puede tener un máximo de 150 caracteres.",
+        "categories": "Seleccione al menos una categoría. Puede seleccionar un máximo de 3 categorías.",
+        "address": "La dirección es obligatoria.",
+        "phone": "El teléfono debe ser un número válido (por ejemplo, +5511999999999).",
+        "email": "El correo electrónico debe ser una dirección válida.",
+        "latitude": "Seleccione una ubicación en el mapa.",
+        "longitude": "Seleccione una ubicación en el mapa."
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Información Básica"
+      },
+      "2": {
+        "title": "Información de Contacto"
+      },
+      "3": {
+        "title": "Configuración de Ubicación",
+        "description": "Haz clic en el mapa para ajustar tu ubicación"
+      },
+      "4": {
+        "title": "Configuración de Pago"
+      },
+      "5": {
+        "title": "Revisar y Confirmar",
+        "description": "Revisa tu configuración aquí"
+      }
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Idiomas",

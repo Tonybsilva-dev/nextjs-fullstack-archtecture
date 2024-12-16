@@ -229,6 +229,91 @@
       "icon": "Pending status icon"
     }
   },
+  "setup-company": {
+    "page": {
+      "title": "Setup Company",
+      "description": "Complete the following steps to establish your company's profile in our system."
+    },
+    "form": {
+      "empty-state": "Not implemented.",
+      "dialog": {
+        "allow-geolocation": "Allow Geolocation?",
+        "geolocation-description": "We would like to access your current location to start the map view as close as possible to your store."
+      },
+      "labels": {
+        "name": "Name",
+        "document": "Document",
+        "description": "Description",
+        "categories": "Categories",
+        "address": "Address",
+        "phone": "Phone",
+        "email": "Email",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "submit": "Submit",
+        "selected-location": "Selected location"
+      },
+      "placeholders": {
+        "name": "Enter your name",
+        "document": "Enter your document number",
+        "description": "Describe your company",
+        "address": "Enter your address",
+        "phone": "Enter your phone number",
+        "email": "Enter your email",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+      },
+      "buttons": {
+        "submit": "Submit",
+        "nextStep": "Next Step",
+        "previousStep": "Previous Step",
+        "cancel": "Cancel",
+        "signOut": "Sign Out",
+        "allowLocation": "Allow",
+        "denyLocation": "Deny",
+        "back": "Back"
+      },
+      "status": {
+        "payment-details": "Payment preferences",
+        "success": {
+          "message": "The form was submitted successfully."
+        },
+        "error": {
+          "message": "An error occurred while submitting the form."
+        }
+      },
+      "validations": {
+        "name": "The Name field is required.",
+        "document": "Document must be in the format XX.XXX.XXX/XXXX-XX.",
+        "description": "Description can have a maximum of 150 characters.",
+        "categories": "Please select at least one category. You can select a maximum of 3 categories.",
+        "address": "Address is required.",
+        "phone": "Phone must be a valid number (e.g., +5511999999999).",
+        "email": "Email must be a valid email address.",
+        "latitude": "Please select a location on the map.",
+        "longitude": "Please select a location on the map."
+      }
+    },
+    "steps": {
+      "1": {
+        "title": "Basic Info"
+      },
+      "2": {
+        "title": "Contact Info"
+      },
+      "3": {
+        "title": "Location Setup",
+        "description": "Click on the map to adjust your location"
+      },
+      "4": {
+        "title": "Payment Setup"
+      },
+      "5": {
+        "title": "Review & Confirm",
+        "description": "Review here your configurations"
+      }
+    }
+  },
   "components": {
     "language-switcher": {
       "label": "Languages",

@@ -8,22 +8,27 @@ import {
   FormMessage,
 } from '@/shared/modules/components/ui/form';
 import { Input } from '@/shared/modules/components/ui/input';
+import { PageProps } from '@/shared/modules/types/page-props';
 
-export const FormContactInfo: React.FC = () => {
+export const FormContactInfo: React.FC<PageProps> = ({ params }) => {
+  const { translations: t } = params;
   const { control } = useFormContext();
 
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-light">Step 2: Contact Information</h2>
+      <h2 className="mb-6 text-2xl font-light">{t('steps.2.title')}</h2>
       <div className="space-y-4">
         <FormField
           control={control}
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
+              <FormLabel>{t('form.labels.address')}</FormLabel>
               <FormControl>
-                <Input placeholder="Store address" {...field} />
+                <Input
+                  placeholder={t('form.placeholders.address')}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -35,9 +40,9 @@ export const FormContactInfo: React.FC = () => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone</FormLabel>
+              <FormLabel>{t('form.labels.phone')}</FormLabel>
               <FormControl>
-                <Input placeholder="Contact phone" {...field} />
+                <Input placeholder={t('form.placeholders.phone')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -49,9 +54,13 @@ export const FormContactInfo: React.FC = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('form.labels.email')}</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Contact email" {...field} />
+                <Input
+                  type="email"
+                  placeholder={t('form.placeholders.email')}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

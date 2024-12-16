@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 
 import L from 'leaflet';
 import { useFormContext } from 'react-hook-form';
-import { MapContainer, Marker, Popup,TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import {
   Card,
@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/modules/components/ui/card';
+import { PageProps } from '@/shared/modules/types/page-props';
 
 const DefaultIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7/dist/images/marker-icon.png',
@@ -22,12 +23,13 @@ const DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-export const FormReview: React.FC = () => {
+export const FormReview: React.FC<PageProps> = ({ params }) => {
+  const { translations: t } = params;
   const { watch } = useFormContext();
   const {
     name,
     description,
-    category,
+    categories,
     address,
     phone,
     email,
@@ -42,65 +44,78 @@ export const FormReview: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      <h2 className="mb-6 text-3xl font-light">Step 5: Review & Confirm</h2>
-      <p className="mb-4 text-gray-600">
-        Please review all the information below before confirming.
-      </p>
+      <h2 className="mb-6 text-3xl font-light">{t('steps.5.title')}</h2>
+      <p className="mb-4 text-gray-600">{t('steps.5.description')}</p>
 
-      {/* Card de Informações Básicas (Step 1) */}
       <Card>
         <CardHeader>
           <CardTitle className="text-xl font-semibold">
-            Basic Information
+            {t('steps.1.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <dt className="text-sm font-medium text-gray-700">Store Name</dt>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.name')}
+              </dt>
               <dd className="text-base text-gray-900">{name || '-'}</dd>
             </div>
             <div>
-              <dt className="text-sm font-medium text-gray-700">Category</dt>
-              <dd className="text-base text-gray-900">{category || '-'}</dd>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.categories')}
+              </dt>
+              <dd className="text-base text-gray-900">
+                {categories && categories.length > 0
+                  ? categories.join(', ')
+                  : '-'}
+              </dd>
             </div>
             <div className="sm:col-span-2">
-              <dt className="text-sm font-medium text-gray-700">Description</dt>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.description')}
+              </dt>
               <dd className="text-base text-gray-900">{description || '-'}</dd>
             </div>
           </dl>
         </CardContent>
       </Card>
 
-      {/* Card de Informações de Contato (Step 2) */}
       <Card>
         <CardHeader>
           <CardTitle className="text-xl font-semibold">
-            Contact Information
+            {t('steps.2.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <dt className="text-sm font-medium text-gray-700">Address</dt>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.address')}
+              </dt>
               <dd className="text-base text-gray-900">{address || '-'}</dd>
             </div>
             <div>
-              <dt className="text-sm font-medium text-gray-700">Phone</dt>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.phone')}
+              </dt>
               <dd className="text-base text-gray-900">{phone || '-'}</dd>
             </div>
             <div className="sm:col-span-2">
-              <dt className="text-sm font-medium text-gray-700">Email</dt>
+              <dt className="text-sm font-medium text-gray-700">
+                {t('form.labels.email')}
+              </dt>
               <dd className="text-base text-gray-900">{email || '-'}</dd>
             </div>
           </dl>
         </CardContent>
       </Card>
 
-      {/* Card de Localização (Step 3) */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">Location</CardTitle>
+          <CardTitle className="text-xl font-semibold">
+            {t('steps.3.title')}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           {hasLocation ? (
@@ -120,7 +135,7 @@ export const FormReview: React.FC = () => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={[latitude, longitude]}>
-                  <Popup>Your selected location</Popup>
+                  <Popup>{t('form.labels.selectedLocation')}</Popup>
                 </Marker>
               </MapContainer>
             </div>
@@ -132,15 +147,15 @@ export const FormReview: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Card de Payment Setup (Step 4) - Placeholder ou Dados Reais */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">Payment Setup</CardTitle>
+          <CardTitle className="text-xl font-semibold">
+            {t('steps.4.title')}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Se tiver dados de pagamento, liste aqui. Caso contrário, um placeholder */}
           <p className="text-base text-gray-900">
-            Payment details will appear here.
+            {t('form.status.payment-details')}
           </p>
         </CardContent>
       </Card>
