@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 
 export const metadataConfig: Metadata = {
   title: {
-    template: '%s | Fullstack Archtecture',
-    default: 'Fullstack Archtecture',
+    template: '%s | Tempero Tech',
+    default: 'Tempero Tech',
   },
-  description: 'Antonio Silva Fullstack Archtecture',
+  description: 'Antonio Silva Tempero Tech',
   icons: {
     icon: [
       {
@@ -28,22 +28,22 @@ export const metadataConfig: Metadata = {
     card: 'summary_large_image',
     site: '@tonybsilvadev',
     creator: '@antonio_silva',
-    title: 'Fullstack Architecture',
-    description: 'Antonio Silva Fullstack Architecture',
+    title: 'Tempero Tech',
+    description: 'Antonio Silva Tempero Tech',
     images: ['https://i.imgur.com/DaTIIDq.png'],
   },
   openGraph: {
     type: 'website',
-    siteName: 'Fullstack Archtecture',
+    siteName: 'Tempero Tech',
     url: 'https://as-fullstack-archtecture.vercel.app/',
-    title: 'Fullstack Architecture',
-    description: 'Antonio S - Fullstack Archtecture with NextJS',
+    title: 'Tempero Tech',
+    description: 'Tempero Tech',
     images: [
       {
         url: 'https://i.imgur.com/DaTIIDq.png',
         width: 1200,
         height: 630,
-        alt: 'Fullstack Architecture',
+        alt: 'Tempero Tech',
       },
     ],
   },

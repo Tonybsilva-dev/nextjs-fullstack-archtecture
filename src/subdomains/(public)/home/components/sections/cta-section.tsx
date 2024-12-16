@@ -41,7 +41,6 @@ export const CTASection = ({ params }: PageProps) => {
         </div>
 
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
-          {/* Services Column */}
           <div className="flex flex-wrap items-center justify-center gap-4 md:col-span-4 md:flex-col md:gap-8">
             {services.map((service, index) => (
               <div
@@ -57,7 +56,6 @@ export const CTASection = ({ params }: PageProps) => {
               </div>
             ))}
           </div>
-          {/* Center Image */}
           <div className="relative md:col-span-4">
             <div className="relative">
               <div className="rounded-blob absolute inset-0 -z-10 bg-primary" />
@@ -71,7 +69,6 @@ export const CTASection = ({ params }: PageProps) => {
             </div>
           </div>
 
-          {/* Product Column */}
           <div className="space-y-6 md:col-span-3">
             <div className="rounded-lg bg-white p-4 shadow-md">
               <FallbackImage

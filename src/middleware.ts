@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import createMiddleware from 'next-intl/middleware';
@@ -11,37 +12,43 @@ const intlMiddleware = createMiddleware({
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Token do next-auth (verifica autenticação)
+  const cookieStore = cookies();
+  const localeFromCookies = cookieStore.get('NEXT_LOCALE');
+
   const token = await getToken({ req });
   const isLoggedIn = !!token;
   const role = token?.role || 'CUSTOMER';
   const company = token?.context?.company;
   const tenant = token?.context.tenant;
-  const locale = req.nextUrl.locale || 'pt';
+  const locale = localeFromCookies?.value;
+
+  console.log('Locale:', locale);
+  console.log('Pathname:', pathname);
+  console.log('Is Logged In:', isLoggedIn);
+  console.log('Role:', role);
+  console.log('Tenant Status:', tenant?.status);
 
   const protectedPaths = [
     `/${locale}/admin`,
     `/${locale}/customer`,
     `/${locale}/manager`,
   ];
+
+  const loginPath = `/${locale}/sign-in`;
+
   const isProtectedPath = protectedPaths.some((protectedPath) =>
     pathname.startsWith(protectedPath)
   );
 
   if (!isLoggedIn && isProtectedPath) {
-    return NextResponse.redirect(new URL(`/${locale}`, req.nextUrl.origin));
+    return NextResponse.redirect(new URL(loginPath, req.nextUrl.origin));
   }
 
   if (isLoggedIn && role === 'ADMIN') {
-    const pendingPath = `/${locale}/admin/store/status/pending`;
-    const rejectedPath = `/${locale}/admin/store/status/rejected`;
-    const setupPath = `/${locale}/setup`;
+    const pendingPath = `/${locale}/admin/dashboard/company/status/pending`;
+    const rejectedPath = `/${locale}/admin/dashboard/company/status/rejected`;
+    const setupPath = `/${locale}/admin/dashboard/company/setup`;
     const dashboardPath = `/${locale}/admin/dashboard`;
-
-    console.log(`Role: ${role}`);
-    console.log(`Tenant Status: ${tenant?.status}`);
-    console.log(`Company ID: ${company?.id}`);
-    console.log(`Current Path: ${pathname}`);
 
     // Admin tenant status checks
     if (tenant?.status === 'PENDING' && pathname !== pendingPath) {
@@ -55,7 +62,8 @@ export default async function middleware(req: NextRequest) {
     if (
       !company?.id &&
       tenant?.status === 'APPROVED' &&
-      pathname !== setupPath
+      pathname !== setupPath &&
+      token
     ) {
       return NextResponse.redirect(new URL(setupPath, req.nextUrl.origin));
     }
@@ -96,8 +104,8 @@ export const config = {
     '/(pt|en|es)/:path*',
     '/dashboard/:path*',
     '/catalog/:path*',
-    '/setup/:path*',
-    '/admin/store/status/:path*',
+    '/admin/dashboard/company/setup/:path*',
+    '/admin/dashboard/company/status/:path*',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

@@ -39,16 +39,22 @@ model Tenant {
 }
 
 model Company {
-  id            String @id @default(uuid()) @map("id")
-  document      String @unique @map("document")
-  name          String @map("name")
-  logoUrl       String @map("logo_url")
-  status        Status @default(PENDING) @map("status")
+  id            String  @id @default(uuid()) @map("id")
+  document      String  @unique @map("document")
+  name          String  @map("name")
+  description   String? @map("description")
+  address       String? @map("address")
+  phone         String? @map("phone")
+  email         String? @map("email")
+  latitude      Float?  @map("latitude")
+  longitude     Float?  @map("longitude")
+  logoUrl       String  @map("logo_url")
+  status        Status  @default(PENDING) @map("status")
   tenantId      String
-  tenant        Tenant @relation(fields: [tenantId], references: [id])
-  productCount  Int    @map("product_count")
-  customerCount Int    @map("customer_count")
-  categoryCount Int    @map("category_count")
+  tenant        Tenant  @relation(fields: [tenantId], references: [id])
+  productCount  Int     @default(0) @map("product_count")
+  customerCount Int     @default(0) @map("customer_count")
+  categoryCount Int     @default(0) @map("category_count")
 
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
@@ -57,6 +63,7 @@ model Company {
   categories Category[] @relation("company_categories")
   products   Product[]  @relation("company_products")
 
+  @@unique([document, tenantId])
   @@map("companies")
 }
 
@@ -183,12 +190,30 @@ model ActivityLog {
 }
 
 model TenantSetting {
-  id        String   @id @default(uuid())
-  tenantId  String   @map("tenant_id")
-  tenant    Tenant   @relation(fields: [tenantId], references: [id])
-  key       String   @map("key") // e.g., "auto_approve_companys"
-  value     String   @map("value") // e.g., "true"
-  createdAt DateTime @default(now()) @map("created_at")
+  id        String    @id @default(uuid())
+  tenantId  String    @map("tenant_id")
+  tenant    Tenant    @relation(fields: [tenantId], references: [id])
+  key       String    @map("key") // e.g., "auto_approve_companys"
+  value     String    @map("value") // e.g., "true"
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   @@map("tenant_settings")
+}
+
+model Address {
+  id        String    @id @default(uuid()) @map("id")
+  street    String
+  city      String
+  state     String
+  zipCode   String    @map("zip_code")
+  country   String
+  latitude  Float?
+  longitude Float?
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("addresses")
 }

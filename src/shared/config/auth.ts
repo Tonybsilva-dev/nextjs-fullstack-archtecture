@@ -1,4 +1,5 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import { cookies } from 'next/headers';
 import { NextAuthOptions } from 'next-auth';
 import { Adapter } from 'next-auth/adapters';
 import Credentials from 'next-auth/providers/credentials';
@@ -41,6 +42,8 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
+        const cookieStore = cookies();
+
         // Valida as credenciais usando o Zod
         const parsedCredentials = signInZodSchema.safeParse(credentials);
         if (!parsedCredentials.success) {
@@ -97,6 +100,7 @@ export const authOptions: NextAuthOptions = {
             })
           : null;
 
+        cookieStore.set('sub', user.id);
         return {
           ...user,
           role,
@@ -183,6 +187,7 @@ export const authOptions: NextAuthOptions = {
           };
         }
       }
+
       return token;
     },
     session({ session, token }) {

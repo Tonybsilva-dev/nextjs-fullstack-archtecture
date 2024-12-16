@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import LOGO_IMG from '@/assets/logo/horizontal-logo.png';
@@ -17,9 +16,8 @@ import { CountTenantApproved } from '../components/form/count-tenant-approved';
 import { DemoRequestForm } from '../components/form/request-demo-form';
 import { DemoRequestFormValues } from '../validations/request-demo.validations';
 
-export const RequestDemoView = ({ params }: PageProps) => {
+export const RequestDemoView = ({ params, router }: PageProps) => {
   const isMobile = useBreakpoint();
-  const router = useRouter();
   const { translations: t } = params;
 
   const onSubmit = async (data: DemoRequestFormValues) => {
@@ -41,7 +39,7 @@ export const RequestDemoView = ({ params }: PageProps) => {
           description: formatDate(new Date()),
           action: {
             label: t('form.labels.sign-in'),
-            onClick: () => router.push('/sign-in'),
+            onClick: () => router?.push('/sign-in'),
           },
         });
       } else {
@@ -66,7 +64,7 @@ export const RequestDemoView = ({ params }: PageProps) => {
     >
       <div className="mb-6 flex w-full items-center justify-between">
         <BackButton />
-        <div className="w-[180px]">
+        <div className={`${!isMobile ? 'w-[180px]' : ''}`}>
           <LanguageSwitcher compact={isMobile} />
         </div>
       </div>
@@ -86,15 +84,12 @@ export const RequestDemoView = ({ params }: PageProps) => {
         </Typography>
       </header>
       <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-        {/* Conteúdo à esquerda */}
         <div className="my-auto hidden h-full items-center justify-center space-y-6 border-r p-4 md:flex">
           <div>
             <FallbackImage src={LOGO_IMG} alt="" width={1000} height={1000} />
-            {/* Contador de Solicitações */}
             <CountTenantApproved />
           </div>
         </div>
-        {/* Formulário à direita */}
         <div className="block w-full">
           <DemoRequestForm onSubmit={onSubmit} params={{ translations: t }} />
         </div>
