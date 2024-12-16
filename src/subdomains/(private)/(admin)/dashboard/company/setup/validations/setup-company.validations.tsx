@@ -3,45 +3,42 @@ import { z } from 'zod';
 import { regex } from '@/shared/modules/utils/regex';
 
 /* Zod Schemas */
+export const storeZodSchema = (t: (key: string) => string) => {
+  return z.object({
+    name: z.string().min(3, { message: t('form.validations.name') }),
+    description: z
+      .string()
+      .max(150, { message: t('form.validations.description') })
+      .optional(),
+    categories: z
+      .array(z.string().min(1))
+      .min(1, { message: t('form.validations.categories') })
+      .max(3, { message: t('form.validations.categories') }),
+    document: z.string().regex(regex.cnpj, {
+      message: t('form.validations.document'),
+    }),
+    address: z.string().nonempty({ message: t('form.validations.address') }),
+    phone: z.string().regex(/^\+?\d+$/, {
+      message: t('form.validations.phone'),
+    }),
+    email: z.string().email({ message: t('form.validations.email') }),
 
-export const storeZodSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: 'Store name must be at least 3 characters long.' }),
-  description: z
-    .string()
-    .max(150, { message: 'Description can have a maximum of 150 characters.' })
-    .optional(),
-  categories: z
-    .array(z.string().min(1))
-    .min(1, { message: 'Please select at least one category.' })
-    .max(3, { message: 'You can select a maximum of 3 categories.' }),
-  document: z
-    .string()
-    .regex(regex.cnpj, {
-      message: 'CNPJ must be in the format XX.XXX.XXX/XXXX-XX.',
-    }),
-  address: z.string().nonempty({ message: 'Address is required.' }),
-  phone: z.string().regex(/^\+?\d+$/, {
-    message: 'Phone must be a valid number (e.g., +5511999999999).',
-  }),
-  email: z.string().email({ message: 'Email must be a valid email address.' }),
-
-  latitude: z
-    .number()
-    .min(-90)
-    .max(90)
-    .refine((val) => val !== 0, {
-      message: 'Please select a location on the map.',
-    }),
-  longitude: z
-    .number()
-    .min(-180)
-    .max(180)
-    .refine((val) => val !== 0, {
-      message: 'Please select a location on the map.',
-    }),
-});
+    latitude: z
+      .number()
+      .min(-90)
+      .max(90)
+      .refine((val) => val !== 0, {
+        message: t('form.validations.latitude'),
+      }),
+    longitude: z
+      .number()
+      .min(-180)
+      .max(180)
+      .refine((val) => val !== 0, {
+        message: t('form.validations.longitude'),
+      }),
+  });
+};
 
 export const basicInfoZodSchema = z.object({
   name: z.string().min(3),
@@ -56,6 +53,6 @@ export const contactInfoZodSchema = z.object({
 });
 
 /* Types */
-export type Store = z.infer<typeof storeZodSchema>;
+export type Store = z.infer<ReturnType<typeof storeZodSchema>>;
 export type BasicInfoStore = z.infer<typeof basicInfoZodSchema>;
 export type ContactInfoStore = z.infer<typeof contactInfoZodSchema>;

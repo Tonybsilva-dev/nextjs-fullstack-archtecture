@@ -59,8 +59,10 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
   const [askGeoPermission, setAskGeoPermission] = useState(false);
   const [geoChecked, setGeoChecked] = useState(false);
 
+  const schema = storeZodSchema(t);
+
   const methods = useForm<StoreData>({
-    resolver: zodResolver(storeZodSchema),
+    resolver: zodResolver(schema),
     defaultValues,
     mode: 'onChange',
   });
