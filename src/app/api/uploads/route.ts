@@ -1,4 +1,8 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import {
+  ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 import { v4 as uuidv4 } from 'uuid';
@@ -60,4 +64,53 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Todo - Create a GET method to fetch files
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const folder = searchParams.get('folder') || 'files';
+    const limitParam = searchParams.get('limit') || '100';
+    const limit = limitParam ? parseInt(limitParam, 10) : 100;
+
+    if (isNaN(limit) || limit <= 0) {
+      return NextResponse.json(
+        { error: '[limit] search-params must be have a positive number.' },
+        { status: 400 }
+      );
+    }
+
+    const listParams = {
+      Bucket: BUCKET,
+      Prefix: `${folder}/`,
+      MaxKeys: limit,
+    };
+
+    const command = new ListObjectsV2Command(listParams);
+    const response = await s3.send(command);
+
+    if (!response.Contents) {
+      return NextResponse.json({ files: [] });
+    }
+
+    const files = response.Contents.map((item) => {
+      const fileUrl = `https://${BUCKET}.s3.${AWS_REGION}.amazonaws.com/${item.Key}`;
+      return {
+        key: item.Key,
+        lastModified: item.LastModified,
+        size: item.Size,
+        url: fileUrl,
+      };
+    });
+
+    return NextResponse.json({ files });
+  } catch (error) {
+    if (error instanceof AppError) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    console.error('Error listing files from AWS:', error);
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
+  }
+}
