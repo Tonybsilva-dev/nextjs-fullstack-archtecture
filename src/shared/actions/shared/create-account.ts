@@ -13,7 +13,7 @@ export const createAccount = async (
   const account = await getAccountByProviderId(email);
 
   if (account) {
-    throw new AppError('Account already exists. (FSA-9QOLE)', true);
+    throw new AppError('Account already exists. (TEMPERO-5DM62)', true);
   }
 
   return await db.account.create({

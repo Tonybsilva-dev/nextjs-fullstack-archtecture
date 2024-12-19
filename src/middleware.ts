@@ -22,12 +22,6 @@ export default async function middleware(req: NextRequest) {
   const tenant = token?.context.tenant;
   const locale = localeFromCookies?.value;
 
-  console.log('Locale:', locale);
-  console.log('Pathname:', pathname);
-  console.log('Is Logged In:', isLoggedIn);
-  console.log('Role:', role);
-  console.log('Tenant Status:', tenant?.status);
-
   const protectedPaths = [
     `/${locale}/admin`,
     `/${locale}/customer`,

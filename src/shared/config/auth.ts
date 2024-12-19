@@ -80,7 +80,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!passwordRecord)
-          throw new Error('Invalid credentials. (FSA-FAX5P)');
+          throw new Error('Invalid credentials. (TEMPERO-9V29O)');
 
         const isValidPassword = await verifyPassword(
           parsedCredentials.data.password,
@@ -88,10 +88,14 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isValidPassword)
-          throw new Error('Invalid credentials. (FSA-FAX5P)');
+          throw new Error('Invalid credentials. (TEMPERO-9V29O)');
 
         const role = user.accounts[0]?.type || 'CUSTOMER';
-        const tenantId = user.tenant?.id || undefined;
+        const tenantId = user.tenant?.id;
+
+        if (tenantId) {
+          cookieStore.set('tenant', tenantId);
+        }
 
         const company = tenantId
           ? await db.company.findFirst({
@@ -197,6 +201,15 @@ export const authOptions: NextAuthOptions = {
         session.user.context = token.context;
       }
       return session;
+    },
+  },
+  events: {
+    signOut: async () => {
+      const cookieStore = cookies();
+
+      cookieStore.delete('tenant');
+      cookieStore.delete('sub');
+      cookieStore.delete('next-auth.session-token');
     },
   },
 };

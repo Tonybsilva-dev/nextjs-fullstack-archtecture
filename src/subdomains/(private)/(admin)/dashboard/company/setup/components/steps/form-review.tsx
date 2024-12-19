@@ -135,7 +135,7 @@ export const FormReview: React.FC<PageProps> = ({ params }) => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={[latitude, longitude]}>
-                  <Popup>{t('form.labels.selectedLocation')}</Popup>
+                  <Popup>{t('form.labels.selected-location')}</Popup>
                 </Marker>
               </MapContainer>
             </div>

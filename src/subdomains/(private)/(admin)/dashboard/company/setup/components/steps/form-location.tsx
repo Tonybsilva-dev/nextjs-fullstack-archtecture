@@ -57,7 +57,7 @@ export const FormLocation: React.FC<PageProps> = ({ params }) => {
       <>
         {latitude !== 0 && longitude !== 0 && (
           <Marker position={[latitude, longitude]}>
-            <Popup>{t('form.labels.selectedLocation')}</Popup>
+            <Popup>{t('form.labels.selected-location')}</Popup>
           </Marker>
         )}
       </>

@@ -20,3 +20,13 @@ export const getUniqueTenant = async (tenantName: string) => {
 
   return { result, uniqueName };
 };
+
+export const getTenantById = async (id: string) => {
+  const result = await db.tenant.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  return { result };
+};

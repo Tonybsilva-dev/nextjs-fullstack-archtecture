@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BanIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -38,6 +38,7 @@ type StoreData = {
   email: string;
   latitude: number;
   longitude: number;
+  logoUrl: File | null;
 };
 
 const defaultValues: StoreData = {
@@ -50,10 +51,12 @@ const defaultValues: StoreData = {
   email: '',
   latitude: 0,
   longitude: 0,
+  logoUrl: null,
 };
 
 export const SetupCompanyView = ({ params, router }: PageProps) => {
   const { translations: t } = params;
+  const { data: session } = useSession();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [askGeoPermission, setAskGeoPermission] = useState(false);
@@ -131,7 +134,6 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
                   </Button>
                   <Button
                     onClick={() => {
-                      // Tentar obter a localização
                       navigator.geolocation.getCurrentPosition(
                         (position) => {
                           const { latitude, longitude } = position.coords;
@@ -142,7 +144,6 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
                         },
                         (error) => {
                           console.error('Geolocation error:', error);
-                          // Não conseguiu geolocalizar, segue sem
                           setAskGeoPermission(false);
                           setGeoChecked(true);
                         }
@@ -164,6 +165,15 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
     }
   };
 
+  const handleBack = () => {
+    const storeId = session?.user.context.company?.id;
+    if (storeId) {
+      router?.back();
+    } else {
+      signOut();
+    }
+  };
+
   useEffect(() => {
     if (currentStep === 3 && !geoChecked) {
       setAskGeoPermission(true);
@@ -171,36 +181,54 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
   }, [currentStep, geoChecked]);
 
   const onSubmit = async (data: StoreData) => {
+    const cookies = await fetch('/api/cookies', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!cookies.ok) {
+      throw new AppError(`Cookies error! - (TEMPERO-4AMJK)`, true);
+    }
+
+    const cookiesParsed = await cookies.json();
+    const { tenant } = cookiesParsed;
+
     try {
-      const response = await fetch('/api/company', {
+      let companyLogoUrl = '';
+
+      if (data.logoUrl) {
+        const formData = new FormData();
+        formData.append('file', data?.logoUrl);
+        formData.append('folder', 'companies');
+        formData.append('customName', data.name);
+
+        const uploadFile = await fetch('/api/uploads', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const { fileUrl } = await uploadFile.json();
+
+        companyLogoUrl = fileUrl;
+      }
+
+      await fetch('/api/company', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          logoUrl: companyLogoUrl,
+          tenant,
+        }),
       });
 
-      const responseData = await response.json();
-
-      if (response.ok) {
-        toast.success(t('form.status.success.message'), {
-          description: formatDate(new Date()),
-        });
-
-        signOut();
-
-        toast.success(t('form.signOutMessage'));
-      } else {
-        toast.error(responseData.error, {
-          description: formatDate(new Date()),
-        });
-      }
-      methods.reset();
+      toast.success(t('form.status.success.message'), {
+        description: formatDate(new Date()),
+      });
+      // signOut();
     } catch (error) {
-      const appError = AppError.from(error);
-      appError.logError();
-
-      toast.error(appError.message, {
+      console.error('Erro no processo de submissão:', error);
+      toast.error(t('form.status.error.message'), {
         description: formatDate(new Date()),
       });
     }
@@ -227,7 +255,7 @@ export const SetupCompanyView = ({ params, router }: PageProps) => {
 
           <div className="mt-12 flex justify-between">
             {currentStep === 1 ? (
-              <Button variant="outline" onClick={router?.back}>
+              <Button variant="outline" onClick={handleBack}>
                 {t('form.buttons.cancel')}
               </Button>
             ) : (

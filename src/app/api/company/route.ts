@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       email,
       latitude,
       longitude,
+      logoUrl,
     } = body;
 
     // Validar os dados aqui ou garantir que a action `createStore` valide
@@ -43,7 +44,8 @@ export async function POST(req: NextRequest) {
       phone,
       email,
       latitude,
-      longitude
+      longitude,
+      logoUrl
     );
     return NextResponse.json({
       message: 'Company created successfully',

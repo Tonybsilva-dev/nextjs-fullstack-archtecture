@@ -10,6 +10,7 @@ export const storeZodSchema = (t: (key: string) => string) => {
       .string()
       .max(150, { message: t('form.validations.description') })
       .optional(),
+    logoUrl: z.instanceof(File).optional(),
     categories: z
       .array(z.string().min(1))
       .min(1, { message: t('form.validations.categories') })
@@ -17,7 +18,7 @@ export const storeZodSchema = (t: (key: string) => string) => {
     document: z.string().regex(regex.cnpj, {
       message: t('form.validations.document'),
     }),
-    address: z.string().nonempty({ message: t('form.validations.address') }),
+    address: z.string().min(1, { message: t('form.validations.address') }),
     phone: z.string().regex(/^\+?\d+$/, {
       message: t('form.validations.phone'),
     }),
@@ -40,19 +41,5 @@ export const storeZodSchema = (t: (key: string) => string) => {
   });
 };
 
-export const basicInfoZodSchema = z.object({
-  name: z.string().min(3),
-  description: z.string().max(150).optional(),
-  category: z.string().nonempty(),
-});
-
-export const contactInfoZodSchema = z.object({
-  address: z.string().nonempty(),
-  phone: z.string().regex(/^\+?\d+$/),
-  email: z.string().email(),
-});
-
 /* Types */
 export type Store = z.infer<ReturnType<typeof storeZodSchema>>;
-export type BasicInfoStore = z.infer<typeof basicInfoZodSchema>;
-export type ContactInfoStore = z.infer<typeof contactInfoZodSchema>;

@@ -12,7 +12,7 @@ export const createTenant = async (tenantName: string) => {
   const tenant = await getUniqueTenant(tenantName);
 
   if (tenant.result) {
-    throw new AppError('Tenant already exists. (FSA-RJ6H9)', true);
+    throw new AppError('Tenant already exists. (TEMPERO-IB4SS)', true);
   }
 
   const secret = await hash(tenant.uniqueName, HASH_ROUNDS);

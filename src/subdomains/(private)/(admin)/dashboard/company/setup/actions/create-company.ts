@@ -15,17 +15,20 @@ export const createCompany = async (
   phone: string,
   email: string,
   latitude: number,
-  longitude: number
+  longitude: number,
+  logoUrl: string
 ) => {
   try {
     const company = await getCompany(tenantId, document);
 
     if (company) {
       throw new AppError(
-        'Company with this CNPJ already exists for the tenant. (FSA-24020)',
+        'Company with this CNPJ already exists for the tenant. (TEMPERO-56CFD)',
         true
       );
     }
+
+    console.log('LOGO URL: ', logoUrl);
 
     await db.company.create({
       data: {
@@ -37,7 +40,7 @@ export const createCompany = async (
         email,
         latitude,
         longitude,
-        logoUrl: '',
+        logoUrl,
         tenant: {
           connect: { id: tenantId },
         },

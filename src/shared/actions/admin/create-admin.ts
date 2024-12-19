@@ -14,7 +14,7 @@ export const createAdmin = async (
   const admin = await getUniqueAdmin(adminEmail);
 
   if (admin) {
-    throw new AppError('Admin already exists. (FSA-8UFB9)', true);
+    throw new AppError('Admin already exists. (TEMPERO-VM2I3)', true);
   }
 
   return await db.user.create({

@@ -17,13 +17,32 @@ import { restaurantCategories } from '../../utils/categories';
 
 export const FormBasicInfo: React.FC<PageProps> = ({ params }) => {
   const { translations: t } = params;
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  const handleFileChange = (file: File) => {
+    setValue('logoUrl', file);
+  };
 
   return (
-    <div>
+    <section
+      id="basic-info"
+      aria-labelledby="basic-info"
+      aria-label="basic-info-form"
+    >
       <h2 className="mb-6 text-2xl font-light">{t('steps.1.title')}</h2>
       <div className="space-y-4">
-        <PhotoUpload onPhotoSelect={() => null} />
+        <FormField
+          control={control}
+          name="logoUrl"
+          render={({ field: { ...fieldProps } }) => (
+            <FormItem>
+              <FormControl>
+                <PhotoUpload onPhotoSelect={handleFileChange} {...fieldProps} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={control}
           name="name"
@@ -93,6 +112,6 @@ export const FormBasicInfo: React.FC<PageProps> = ({ params }) => {
           )}
         />
       </div>
-    </div>
+    </section>
   );
 };
